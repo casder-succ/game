@@ -2,36 +2,14 @@ import React, {useState, useEffect} from 'react';
 
 import './main.sass'
 
-const NodeEditor = ({node, onNameChange}) => {
-    const [element, setElement] = useState(node);
-    const [elementName, setElementName] = useState(element.data.label);
-    const [elementContent, setElementContent] = useState(element.data.content);
+const NodeEditor = ({node, onSubmit}) => {
+    const [elementName, setElementName] = useState(node.data.label);
+    const [elementContent, setElementContent] = useState(node.data.content);
 
     useEffect(() => {
-        setElement(node);
-        setElementName(element.data.label);
-        setElementContent(element.data.content);
-    }, [node, element.data.label, element.data.content])
-
-    const changeName = (event) => {
-        const temp = element;
-        temp.data.label = event.target.value;
-
-        setElement(temp);
-        setElementName(event.target.value)
-    }
-
-    const changeContent = (event) => {
-        const temp = element;
-        temp.data.content = event.target.value;
-
-        setElement(temp);
-        setElementContent(event.target.value);
-    }
-
-    const handleSubmit = () => {
-        console.log('lalala');
-    }
+        setElementName(node.data.label);
+        setElementContent(node.data.content);
+    }, [node.data.label, node.data.content])
 
     return (
         <div className='node-editor'>
@@ -42,7 +20,7 @@ const NodeEditor = ({node, onNameChange}) => {
                         className='input__label'
                         type='text'
                         value={elementName}
-                        onChange={(event) => changeName(event)}
+                        onChange={(event) => setElementName(event.target.value)}
                     />
 
                 </div>
@@ -52,10 +30,10 @@ const NodeEditor = ({node, onNameChange}) => {
                     <textarea
                         className='input__content'
                         value={elementContent}
-                        onChange={(event) => changeContent(event)}
+                        onChange={(event) => setElementContent(event.target.value)}
                     />
                 </div>
-                <button className="node-editor-submit" onClick={handleSubmit}>Submit</button>
+                <button className="node-editor-submit" onClick={() => onSubmit(elementName, elementContent)}>Submit</button>
             </div>
         </div>
     );
