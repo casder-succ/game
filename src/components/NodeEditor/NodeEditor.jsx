@@ -35,7 +35,7 @@ const NodeEditor = ({node, onNameChange}) => {
 
     return (
         <div className='node-editor'>
-            <form onSubmit={handleSubmit} className="node-editor__content">
+            <div className="node-editor__content">
                 <div className="node-editor__item">
                     <label>Label:</label>
                     <input
@@ -55,12 +55,8 @@ const NodeEditor = ({node, onNameChange}) => {
                         onChange={(event) => changeContent(event)}
                     />
                 </div>
-                <input
-                    className="node-editor-submit"
-                    type="submit"
-                    value="Submit"
-                />
-            </form>
+                <button className="node-editor-submit" onClick={handleSubmit}>Submit</button>
+            </div>
         </div>
     );
 };
