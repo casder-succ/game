@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReactFlow, {removeElements, addEdge} from "react-flow-renderer";
+// import  from 'redux';
 
 
 import initialElements from './graphElements';
@@ -99,12 +100,7 @@ const Graph = () => {
         }
     }
 
-    const onElementClick = (event, element) => {
-        if (currElement) {
-
-        }
-        setCurrElement(element);
-    }
+    const onElementClick = (event, element) => setCurrElement(element);
 
     return (
         <div className='graphField'>
@@ -116,8 +112,6 @@ const Graph = () => {
                 nodesDraggable={false}
                 onElementClick={onElementClick}
             >
-
-
                 {currElement && <NodeEditor node={currElement} onSubmit={onElementEdit}/>}
             </ReactFlow>
         </div>
