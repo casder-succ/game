@@ -19,7 +19,7 @@ const Graph = () => {
     // const [nodeContent, setNodeContent] = useState(null);
 
     const dispatch = useDispatch();
-    const elements = useSelector(state => state.elements);
+    const elements = useSelector(state => state.elements.elements);
 
     console.log(elements);
 
