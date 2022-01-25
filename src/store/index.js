@@ -2,9 +2,7 @@ import {createStore} from "redux";
 import initialElements from './graphElements';
 
 const initialState = {
-    elements: {
-        initialElements
-    }
+    elements: initialElements
 }
 
 const reducer = (state = initialState, action) => {
