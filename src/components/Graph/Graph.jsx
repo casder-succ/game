@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import ReactFlow, {removeElements, addEdge} from "react-flow-renderer";
+import React from 'react';
+import ReactFlow from "react-flow-renderer";
 
-import initialElements from '../../store/graphElements';
 import NodeEditor from '../NodeEditor/NodeEditor'
-import {addNode} from '../../utils/index'
 
 import 'react-flow-renderer/dist/style.css';
 import 'react-flow-renderer/dist/theme-default.css';
@@ -12,19 +10,23 @@ import {useDispatch, useSelector} from "react-redux";
 
 
 const Graph = () => {
-    const [elents, setElments] = useState(initialElements);
-    // const [currElement, setCurrElement] = useState(null);
     // const [elId, setElId] = useState(null);
     // const [nodeName, setNodeName] = useState(null);
     // const [nodeContent, setNodeContent] = useState(null);
 
     const dispatch = useDispatch();
     const elements = useSelector(state => state.elements.elements);
+    const currElem = useSelector(state => state.currElement.currElem);
 
-    console.log(elements);
 
-    const onElementsRemove = (elementsToRemove) => setElments((els) => removeElements(elementsToRemove, els));
-    const onConnect = (params) => dispatch({type: "ADD_EDGE", payload: {...params, id: 'e' + params.source + '-' + params.target}});
+    const onElementsRemove = (elementsToRemove) => {
+        console.log(elementsToRemove)
+        dispatch({type: "REMOVE_ELEMENTS", payload: elementsToRemove});
+    }
+
+    const onConnect = (params) => {
+        dispatch({type: "ADD_EDGE", payload: {...params, id: 'e' + params.source + '-' + params.target}});
+    }
 
 
 
@@ -42,37 +44,6 @@ const Graph = () => {
     //     setCurrElement(null);
     // }
     //
-    // useEffect(() => {
-    //     setElements((els) =>
-    //         els.map((el) => {
-    //             if (el.id === elId) {
-    //                 el.data = {
-    //                     ...el.data,
-    //                     label: nodeName,
-    //                 };
-    //             }
-    //
-    //             return el;
-    //         })
-    //     );
-    // }, [elId, nodeName, setElements]);
-    //
-    // useEffect(() => {
-    //     setElements((els) =>
-    //         els.map((el) => {
-    //             if (el.id === elId) {
-    //                 el.data = {
-    //                     ...el.data,
-    //                     content: nodeContent,
-    //                 };
-    //             }
-    //
-    //             return el;
-    //         })
-    //     );
-    //
-    //
-    // }, [elId, nodeContent, setElements]);
     //
     //
     // const parseElementContent = (id, content, x, y) => {
@@ -107,10 +78,8 @@ const Graph = () => {
     //     }
     // }
     //
-    const onElementClick = (event, element) => {
-        console.log(element);
-    }
-    //
+
+    const onElementClick = (event, element) => dispatch({type: "SET_CURR", payload: element});
     return (
         <div className='graphField'>
             <ReactFlow
@@ -121,7 +90,10 @@ const Graph = () => {
                 nodesDraggable={false}
                 onElementClick={onElementClick}
             >
-                {/*{currElement && <NodeEditor node={currElement} onSubmit={onElementEdit}/>}*/}
+                {currElem && <NodeEditor
+                    node={currElem}
+                    // onSubmit={onElementEdit}
+                />}
             </ReactFlow>
         </div>
     );
