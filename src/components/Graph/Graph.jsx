@@ -10,25 +10,18 @@ import {useDispatch, useSelector} from "react-redux";
 
 
 const Graph = () => {
-    // const [elId, setElId] = useState(null);
-    // const [nodeName, setNodeName] = useState(null);
-    // const [nodeContent, setNodeContent] = useState(null);
-
     const dispatch = useDispatch();
     const elements = useSelector(state => state.elements.elements);
     const currElem = useSelector(state => state.currElement.currElem);
 
 
     const onElementsRemove = (elementsToRemove) => {
-        console.log(elementsToRemove)
         dispatch({type: "REMOVE_ELEMENTS", payload: elementsToRemove});
     }
 
     const onConnect = (params) => {
         dispatch({type: "ADD_EDGE", payload: {...params, id: 'e' + params.source + '-' + params.target}});
     }
-
-
 
     //
     // const onElementEdit = (name, content) => {

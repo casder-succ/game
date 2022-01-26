@@ -14,7 +14,6 @@ const elementsReducer = (state = initialState, action) => {
                     action.payload,
                 ],
             };
-            break;
         case "ADD_EDGE":
             return {
                 ...state,
@@ -23,18 +22,16 @@ const elementsReducer = (state = initialState, action) => {
                     action.payload,
                 ],
             };
-            break;
         case "REMOVE_ELEMENTS":
             const ids = action.payload.map((el) => el.id);
             return {
                 ...state,
                 elements: state.elements.filter((el) => !ids.includes(el.id))
-            }
-            break;
+            };
         case "CHANGE_LABEL":
-            break;
+            return {};
         case "CHANGE_CONTENT":
-            break;
+            return {};
         default:
             return state;
     }
