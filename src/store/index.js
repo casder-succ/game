@@ -3,8 +3,8 @@ import elementsReducer from "./elementsReducer";
 import currElemReducer from "./currElemReducer";
 
 const rootReducer = combineReducers({
-    elements: elementsReducer,
     currElement: currElemReducer,
+    elements: elementsReducer,
 })
 
 const store = createStore(rootReducer);

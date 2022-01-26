@@ -3,7 +3,7 @@ const initialState = {
 }
 
 const currElemReducer = (state = initialState, action) => {
-    switch (action) {
+    switch (action.type) {
         case "SET_CURR":
             return {...state, currElem: action.payload};
         case "UNSET_CURR":
