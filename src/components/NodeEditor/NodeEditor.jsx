@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from 'react';
 
 import './main.sass'
+import {useDispatch, useSelector} from "react-redux";
 
 const NodeEditor = ({node, onSubmit}) => {
-    const [elementName, setElementName] = useState(node.data.label);
-    const [elementContent, setElementContent] = useState(node.data.content);
+    const dispatch = useDispatch();
+    const {label, content} = useSelector(state => state.editorFields.fields);
 
-    useEffect(() => {
-        setElementName(node.data.label);
-        setElementContent(node.data.content);
-    }, [node.data.label, node.data.content])
+    dispatch({type: "INIT", payload: {label: node.data.label, content: node.data.content}});
+
 
     return (
         <div className='node-editor'>
@@ -19,8 +18,8 @@ const NodeEditor = ({node, onSubmit}) => {
                     <input
                         className='input__label'
                         type='text'
-                        value={elementName}
-                        onChange={(event) => setElementName(event.target.value)}
+                        value={label}
+                        onChange={(event) => dispatch({type: "CHANGE_LABEL", label: event.target.value})}
                     />
 
                 </div>
@@ -29,11 +28,11 @@ const NodeEditor = ({node, onSubmit}) => {
                     <label>Content</label>
                     <textarea
                         className='input__content'
-                        value={elementContent}
-                        onChange={(event) => setElementContent(event.target.value)}
+                        value={content}
+                        onChange={(event) => dispatch({type: "CHANGE_LABEL", content: event.target.value})}
                     />
                 </div>
-                <button className="node-editor-submit" onClick={() => onSubmit(elementName, elementContent)}>Submit</button>
+                <button className="node-editor-submit" onClick={() => onSubmit(label, content)}>Submit</button>
             </div>
         </div>
     );
