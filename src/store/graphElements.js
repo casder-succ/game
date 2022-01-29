@@ -25,8 +25,8 @@ let elements = [
     sourcePosition: 'right',
     targetPosition: 'left',
     data: {
-      label: ' Node',
-      content: ' '
+      label: 'Node',
+      content: ''
     },
     position: { x: 790, y: 290 },
   },
@@ -35,8 +35,8 @@ let elements = [
     sourcePosition: 'right',
     targetPosition: 'left',
     data: {
-      label: ' Node',
-      content: ' '
+      label: 'Node',
+      content: ''
     },
     position: { x: 790, y: 550 },
   },
