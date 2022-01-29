@@ -23,10 +23,16 @@ const Graph = () => {
         dispatch({type: "ADD_EDGE", payload: {...params, id: 'e' + params.source + '-' + params.target}});
     }
 
-    const onElementClick = (event, element) => {
-        dispatch({type: "SET_CURR", payload: element});
+    const onPaneClick = () => {
+        dispatch({type: "UNSET_CURR"});
     }
-    
+
+    const onElementClick = (event, element) => {
+        if (!(element.id.startsWith("e"))) {
+            dispatch({type: "SET_CURR", payload: element});
+        }
+    }
+
     const onElementEdit = (label, content) => {
         if (label !== currElem.label) {
             dispatch({type: "CHANGE_LABEL", payload: {id: currElem.id, label}});
@@ -43,6 +49,7 @@ const Graph = () => {
         }
 
         dispatch({type: "UNSET_CURR"});
+        document.elementFromPoint(1, 1).click();
     }
 
     const parseElementContent = (oldId, content, x, y) => {
@@ -87,7 +94,9 @@ const Graph = () => {
                 deleteKeyCode={46}
                 nodesDraggable={false}
                 onElementClick={onElementClick}
+                onPaneClick={onPaneClick}
             >
+
                 {currElem && <NodeEditor
                     node={currElem}
                     onSubmit={onElementEdit}
