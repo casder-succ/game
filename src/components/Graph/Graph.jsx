@@ -23,7 +23,12 @@ const Graph = () => {
         dispatch({type: "ADD_EDGE", payload: {...params, id: 'e' + params.source + '-' + params.target}});
     }
 
-    //
+    const onElementClick = (event, element) => {
+        dispatch({type: "SET_CURR", payload: element});
+    }
+
+
+
     // const onElementEdit = (name, content) => {
     //     setElId(currElement.id);
     //     setNodeName(name);
@@ -72,7 +77,7 @@ const Graph = () => {
     // }
     //
 
-    const onElementClick = (event, element) => dispatch({type: "SET_CURR", payload: element});
+
     return (
         <div className='graphField'>
             <ReactFlow
