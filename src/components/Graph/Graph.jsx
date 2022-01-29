@@ -29,54 +29,54 @@ const Graph = () => {
 
 
 
-    // const onElementEdit = (name, content) => {
-    //     setElId(currElement.id);
-    //     setNodeName(name);
-    //     setNodeContent(content);
-    //     if (content) parseElementContent(
-    //         currElement.id,
-    //         content,
-    //         currElement.position.x,
-    //         currElement.position.y
-    //     );
-    //     setCurrElement(null);
-    // }
-    //
-    //
-    //
-    // const parseElementContent = (id, content, x, y) => {
-    //     const a = content.indexOf('[[');
-    //     const b = content.indexOf(']]', a);
-    //
-    //     const label = content.slice(a + 2, b);
-    //
-    //     const params1 = {
-    //         id: `e${id + 1}`,
-    //         data: {
-    //             label,
-    //             content: ''
-    //         },
-    //         sourcePosition: 'right',
-    //         targetPosition: 'left',
-    //         position: {
-    //             x: x + 250,
-    //             y: y + 120
-    //         }
-    //     };
-    //
-    //     const params2 = {
-    //         id: `${id}-e${id + 1}`,
-    //         source: `${id}`,
-    //         target: `e${id + 1}`
-    //     };
-    //
-    //     if (a >= 0) {
-    //         setElements((els) => addNode(params1, els));
-    //         setElements((els) => addEdge(params2, els));
-    //     }
-    // }
-    //
+    const onElementEdit = (label, content) => {
+        if (label !== currElem.label) {
+            dispatch({type: "CHANGE_LABEL", payload: {id: currElem.id, label}});
+        }
 
+        if (content && content !== currElem.content) {
+            dispatch({type: "CHANGE_CONTENT", payload: {id: currElem.id, content}});
+            parseElementContent(
+                currElem.id,
+                content,
+                currElem.position.x,
+                currElem.position.y
+            );
+        }
+    }
+
+    const parseElementContent = (oldId, content, x, y) => {
+        const a = content.indexOf('[[');
+        const b = content.indexOf(']]', a);
+        const label = content.slice(a + 2, b);
+
+        const id = elements.length;
+
+        const params1 = {
+            id: `${id}`,
+            data: {
+                label,
+                content: ''
+            },
+            sourcePosition: 'right',
+            targetPosition: 'left',
+            position: {
+                x: x + 250,
+                y: y + 120
+            }
+        };
+
+        const params2 = {
+            id: `e${oldId}-${id}`,
+            source: `${oldId}`,
+            target: `${id}`
+        };
+
+        if (a !== 1) {
+            dispatch({type: "ADD_NODE", payload: params1});
+            dispatch({type: "ADD_EDGE", payload: params2});
+        }
+    }
 
     return (
         <div className='graphField'>
@@ -90,7 +90,7 @@ const Graph = () => {
             >
                 {currElem && <NodeEditor
                     node={currElem}
-                    // onSubmit={onElementEdit}
+                    onSubmit={onElementEdit}
                 />}
             </ReactFlow>
         </div>
