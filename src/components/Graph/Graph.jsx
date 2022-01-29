@@ -26,9 +26,7 @@ const Graph = () => {
     const onElementClick = (event, element) => {
         dispatch({type: "SET_CURR", payload: element});
     }
-
-
-
+    
     const onElementEdit = (label, content) => {
         if (label !== currElem.label) {
             dispatch({type: "CHANGE_LABEL", payload: {id: currElem.id, label}});
@@ -43,6 +41,8 @@ const Graph = () => {
                 currElem.position.y
             );
         }
+
+        dispatch({type: "UNSET_CURR"});
     }
 
     const parseElementContent = (oldId, content, x, y) => {
