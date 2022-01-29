@@ -8,15 +8,8 @@ const NodeEditor = ({node, onSubmit}) => {
     const {id, label, content} = useSelector(state => state.editorFields.fields);
 
     if (label === "" || (content === "" && node.data.content !== "") || node.id !== id) {
-        console.log( (content === "" && node.data.content !== "") )
-        console.log( (label === "") )
-        console.log( (node.id !== id) )
         dispatch({type: "INIT", payload: {label: node.data.label, content: node.data.content, id: node.id}});
     }
-
-
-
-    console.log(node, label, content)
 
     return (
         <div className='node-editor'>
