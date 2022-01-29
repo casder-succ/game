@@ -1,5 +1,6 @@
 const initialState = {
     fields: {
+        id: "",
         label: "",
         content: "",
     }
@@ -12,24 +13,19 @@ const editorFieldsReducer = (state = initialState, action) => {
                 ...state,
                 fields: {
                     ...initialState.fields,
+                    id: action.payload.id,
                     label: action.payload.label,
                     content: action.payload.content,
                 }
             };
-        case "CHANGE_LABEL":
+        case "CHANGE":
             return {
                 ...state,
                 fields: {
                     ...initialState.fields,
-                    label: action.payload.label,
-                }
-            };
-        case "CHANGE_CONTENT":
-            return {
-                ...state,
-                fields: {
-                    ...initialState.fields,
+                    id: action.payload.id,
                     content: action.payload.content,
+                    label: action.payload.label,
                 }
             };
         default:
