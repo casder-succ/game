@@ -7,6 +7,15 @@ const initialState = {
 
 const editorFieldsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "INIT":
+            return {
+                ...state,
+                fields: {
+                    ...initialState.fields,
+                    label: action.payload.label,
+                    content: action.payload.content,
+                }
+            };
         case "CHANGE_LABEL":
             return {
                 ...state,
