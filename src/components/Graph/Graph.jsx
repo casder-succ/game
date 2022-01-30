@@ -20,7 +20,7 @@ const Graph = () => {
     }
 
     const onConnect = (params) => {
-        dispatch({type: "ADD_EDGE", payload: {...params, id: 'e' + params.source + '-' + params.target}});
+        dispatch({type: "ADD_ELEMENTS", payload: [{...params, id: 'e' + params.source + '-' + params.target}]});
     }
 
     const onPaneClick = () => {
@@ -80,10 +80,10 @@ const Graph = () => {
         };
 
         if (a !== 1) {
-            dispatch({type: "ADD_NODE", payload: params1});
-            dispatch({type: "ADD_EDGE", payload: params2});
+            dispatch({type: "ADD_ELEMENTS", payload: [params1, params2]});
         }
     }
+
 
     return (
         <div className='graphField'>

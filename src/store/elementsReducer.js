@@ -6,20 +6,12 @@ const initialState = {
 
 const elementsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "ADD_NODE":
+        case "ADD_ELEMENTS":
             return {
                 ...state,
                 elements: [
                     ...state.elements,
-                    action.payload,
-                ],
-            };
-        case "ADD_EDGE":
-            return {
-                ...state,
-                elements: [
-                    ...state.elements,
-                    action.payload,
+                    ...action.payload,
                 ],
             };
         case "REMOVE_ELEMENTS":
