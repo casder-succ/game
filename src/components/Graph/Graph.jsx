@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactFlow from "react-flow-renderer";
+import ReactFlow, {ReactFlowProvider} from "react-flow-renderer";
 
 import NodeEditor from '../NodeEditor/NodeEditor'
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,6 @@ const Graph = () => {
     const dispatch = useDispatch();
     const elements = useSelector(state => state.elements.elements);
     const currElem = useSelector(state => state.currElement.currElem);
-
 
     const onElementsRemove = (elementsToRemove) => {
         dispatch({type: "REMOVE_ELEMENTS", payload: elementsToRemove});
@@ -36,10 +35,6 @@ const Graph = () => {
     const onElementEdit = (label, title, content) => {
         if (label !== currElem.data.label) {
             dispatch({type: "CHANGE_LABEL", payload: {id: currElem.id, label}});
-        }
-
-        if (title !== currElem.data.title) {
-            dispatch({type: "CHANGE_LABEL", payload: {id: currElem.id, title}});
         }
 
         if (content && content !== currElem.data.content) {
@@ -91,21 +86,21 @@ const Graph = () => {
 
     return (
         <div className='graphField'>
-            <ReactFlow
-                elements={elements}
-                onElementsRemove={onElementsRemove}
-                onConnect={onConnect}
-                deleteKeyCode={46}
-                nodesDraggable={true}
-                onElementClick={onElementClick}
-                onPaneClick={onPaneClick}
-            >
+                <ReactFlow
+                    elements={elements}
+                    onElementsRemove={onElementsRemove}
+                    onConnect={onConnect}
+                    deleteKeyCode={46}
+                    nodesDraggable={false}
+                    onElementClick={onElementClick}
+                    onPaneClick={onPaneClick}
+                >
 
-                {currElem && <NodeEditor
-                    node={currElem}
-                    onSubmit={onElementEdit}
-                />}
-            </ReactFlow>
+                    {currElem && <NodeEditor
+                        node={currElem}
+                        onSubmit={onElementEdit}
+                    />}
+                </ReactFlow>
         </div>
     );
 
