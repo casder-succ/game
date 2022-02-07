@@ -33,12 +33,16 @@ const Graph = () => {
         }
     }
 
-    const onElementEdit = (label, content) => {
-        if (label !== currElem.label) {
+    const onElementEdit = (label, title, content) => {
+        if (label !== currElem.data.label) {
             dispatch({type: "CHANGE_LABEL", payload: {id: currElem.id, label}});
         }
 
-        if (content && content !== currElem.content) {
+        if (title !== currElem.data.title) {
+            dispatch({type: "CHANGE_LABEL", payload: {id: currElem.id, title}});
+        }
+
+        if (content && content !== currElem.data.content) {
             dispatch({type: "CHANGE_CONTENT", payload: {id: currElem.id, content}});
             parseElementContent(
                 currElem.id,
@@ -92,7 +96,7 @@ const Graph = () => {
                 onElementsRemove={onElementsRemove}
                 onConnect={onConnect}
                 deleteKeyCode={46}
-                nodesDraggable={false}
+                nodesDraggable={true}
                 onElementClick={onElementClick}
                 onPaneClick={onPaneClick}
             >

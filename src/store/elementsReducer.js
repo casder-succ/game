@@ -40,6 +40,16 @@ const elementsReducer = (state = initialState, action) => {
                     return node;
                 })
             };
+        case "CHANGE_TITLE":
+            return {
+                ...state,
+                elements: state.elements.map((node) => {
+                    if (node.id === action.payload.id) {
+                        node.data.title = action.payload.title;
+                    }
+                    return node;
+                })
+            };
         case "UPDATE_CONTENT":
             return {
                 ...state,
