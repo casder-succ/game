@@ -7,7 +7,7 @@ const NodeEditor = ({node, onSubmit}) => {
     const dispatch = useDispatch();
     const {id, label, content} = useSelector(state => state.editorFields.fields);
 
-    if (label === "" || (content === "" && node.data.content !== "") || node.id !== id) {
+    if ((label === "" && node.id !== id) || (content === "" && node.id !== id) || node.id !== id) {
         dispatch({type: "INIT", payload: {label: node.data.label, content: node.data.content, id: node.id}});
     }
 
@@ -17,15 +17,15 @@ const NodeEditor = ({node, onSubmit}) => {
                 <div className="node-editor__item">
                     Id: {id}
                 </div>
+                
                 <div className="node-editor__item">
-                    <label>Label:</label>
+                    <label>Title:</label>
                     <input
                         className='input__label'
                         type='text'
                         value={label}
                         onChange={(event) => dispatch({type: "CHANGE", payload: {label: event.target.value, content, id}})}
                     />
-
                 </div>
 
                 <div className="node-editor__item">
