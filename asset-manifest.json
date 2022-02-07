@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/casder-succ/game/static/css/main.13e2576a.chunk.css",
-    "main.js": "/casder-succ/game/static/js/main.e6b0eef9.chunk.js",
-    "main.js.map": "/casder-succ/game/static/js/main.e6b0eef9.chunk.js.map",
+    "main.js": "/casder-succ/game/static/js/main.f7ad4e9e.chunk.js",
+    "main.js.map": "/casder-succ/game/static/js/main.f7ad4e9e.chunk.js.map",
     "runtime-main.js": "/casder-succ/game/static/js/runtime-main.ff8919da.js",
     "runtime-main.js.map": "/casder-succ/game/static/js/runtime-main.ff8919da.js.map",
     "static/css/2.2e9d90d3.chunk.css": "/casder-succ/game/static/css/2.2e9d90d3.chunk.css",
-    "static/js/2.4aef074d.chunk.js": "/casder-succ/game/static/js/2.4aef074d.chunk.js",
-    "static/js/2.4aef074d.chunk.js.map": "/casder-succ/game/static/js/2.4aef074d.chunk.js.map",
+    "static/js/2.5173e680.chunk.js": "/casder-succ/game/static/js/2.5173e680.chunk.js",
+    "static/js/2.5173e680.chunk.js.map": "/casder-succ/game/static/js/2.5173e680.chunk.js.map",
     "static/js/3.966afb57.chunk.js": "/casder-succ/game/static/js/3.966afb57.chunk.js",
     "static/js/3.966afb57.chunk.js.map": "/casder-succ/game/static/js/3.966afb57.chunk.js.map",
     "index.html": "/casder-succ/game/index.html",
     "static/css/2.2e9d90d3.chunk.css.map": "/casder-succ/game/static/css/2.2e9d90d3.chunk.css.map",
     "static/css/main.13e2576a.chunk.css.map": "/casder-succ/game/static/css/main.13e2576a.chunk.css.map",
-    "static/js/2.4aef074d.chunk.js.LICENSE.txt": "/casder-succ/game/static/js/2.4aef074d.chunk.js.LICENSE.txt"
+    "static/js/2.5173e680.chunk.js.LICENSE.txt": "/casder-succ/game/static/js/2.5173e680.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ff8919da.js",
     "static/css/2.2e9d90d3.chunk.css",
-    "static/js/2.4aef074d.chunk.js",
+    "static/js/2.5173e680.chunk.js",
     "static/css/main.13e2576a.chunk.css",
-    "static/js/main.e6b0eef9.chunk.js"
+    "static/js/main.f7ad4e9e.chunk.js"
   ]
 }
