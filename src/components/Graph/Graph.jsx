@@ -2,12 +2,11 @@ import React from 'react';
 import ReactFlow from "react-flow-renderer";
 
 import NodeEditor from '../NodeEditor/NodeEditor'
+import {useDispatch, useSelector} from "react-redux";
 
 import 'react-flow-renderer/dist/style.css';
 import 'react-flow-renderer/dist/theme-default.css';
 import './main.sass'
-import {useDispatch, useSelector} from "react-redux";
-
 
 const Graph = () => {
     const dispatch = useDispatch();
@@ -49,7 +48,7 @@ const Graph = () => {
         }
 
         dispatch({type: "UNSET_CURR"});
-        document.elementFromPoint(1, 1).click();
+        document.getElementsByClassName('react-flow__pane')[0].click();
     }
 
     const parseElementContent = (oldId, content, x, y) => {
