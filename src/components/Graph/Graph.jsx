@@ -20,6 +20,7 @@ const Graph = () => {
 
     const onConnect = (params) => {
         dispatch({type: "ADD_ELEMENTS", payload: [{...params, id: 'e' + params.source + '-' + params.target}]});
+        dispatch({type: "UPDATE_CONTENT", payload: {id: params.source, content: '\n[[]]'}});
     }
 
     const onPaneClick = () => {

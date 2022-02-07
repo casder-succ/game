@@ -23,7 +23,7 @@ const elementsReducer = (state = initialState, action) => {
         case "CHANGE_LABEL":
             return {
                 ...state,
-                elements: initialState.elements.map((node) => {
+                elements: state.elements.map((node) => {
                     if (node.id === action.payload.id) {
                         node.data.label = action.payload.label;
                     }
@@ -33,9 +33,19 @@ const elementsReducer = (state = initialState, action) => {
         case "CHANGE_CONTENT":
             return {
                 ...state,
-                elements: initialState.elements.map((node) => {
+                elements: state.elements.map((node) => {
                     if (node.id === action.payload.id) {
                         node.data.content = action.payload.content;
+                    }
+                    return node;
+                })
+            };
+        case "UPDATE_CONTENT":
+            return {
+                ...state,
+                elements: state.elements.map((node) => {
+                    if (node.id === action.payload.id) {
+                        node.data.content += action.payload.content;
                     }
                     return node;
                 })
