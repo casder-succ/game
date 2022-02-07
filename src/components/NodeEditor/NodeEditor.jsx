@@ -17,7 +17,7 @@ const NodeEditor = ({node, onSubmit}) => {
                 <div className="node-editor__item">
                     Id: {id}
                 </div>
-                
+
                 <div className="node-editor__item">
                     <label>Title:</label>
                     <input
