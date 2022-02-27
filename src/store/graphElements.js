@@ -7,8 +7,10 @@ let elements = [
         data: {
             label: 'Input Node',
             title: 'Riner goes work',
-            content: 'Hello! This is the first node.'
+            content: 'Hello! This is the first node. \n [[Default Node]]',
+            links: [{id: 2, label: 'Default Node'}],
         },
+
         position: {x: 250, y: 420},
     },
     {
@@ -18,8 +20,10 @@ let elements = [
         data: {
             label: 'Default Node',
             title: 'Riner meets Sandy',
-            content: 'Hello. I am the second node'
+            content: 'Hello. I am the second node [[Node]] [[Node]]',
+            links: [{id: 3, label: 'Node'}, {id: 4, label: 'Node'}],
         },
+
         position: {x: 500, y: 420},
     },
     {
@@ -29,7 +33,8 @@ let elements = [
         data: {
             label: 'Node',
             title: 'Sandy says yes',
-            content: ''
+            content: '',
+            links: [],
         },
         position: {x: 790, y: 290},
     },
@@ -40,7 +45,8 @@ let elements = [
         data: {
             label: 'Node',
             title: 'Sandy says no',
-            content: ''
+            content: '',
+            links: [],
         },
         position: {x: 790, y: 550},
     },
