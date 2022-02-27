@@ -12,6 +12,7 @@ const Graph = () => {
     const dispatch = useDispatch();
     const elements = useSelector(state => state.elements.elements);
     const currElem = useSelector(state => state.currElement.currElem);
+    const REG_FOR_NODES = /\[[[\sA-Za-z]+]]/gm;
 
     const onElementsRemove = (elementsToRemove) => {
         dispatch({type: "REMOVE_ELEMENTS", payload: elementsToRemove});
@@ -32,7 +33,8 @@ const Graph = () => {
         }
     }
 
-    const onElementEdit = (label, title, content) => {
+    const onElementEdit = (label, content, node) => {
+        console.log(node)
         if (label !== currElem.data.label) {
             dispatch({type: "CHANGE_LABEL", payload: {id: currElem.id, label}});
         }
@@ -42,6 +44,7 @@ const Graph = () => {
             parseElementContent(
                 currElem.id,
                 content,
+                node,
                 currElem.position.x,
                 currElem.position.y
             );
@@ -51,36 +54,46 @@ const Graph = () => {
         document.getElementsByClassName('react-flow__pane')[0].click();
     }
 
-    const parseElementContent = (oldId, content, x, y) => {
-        const a = content.indexOf('[[');
-        const b = content.indexOf(']]', a);
-        const label = content.slice(a + 2, b);
+    const parseElementContent = (oldId, content, node, x, y) => {
+        const x_y = [{x: 150, y: 120}, {x: 250, y: 80}, {x: 250, y: -120}, {x: 150, y: -180}]
+        const names_arr = [...content.matchAll(REG_FOR_NODES)];
 
-        const id = elements.length;
 
-        const params1 = {
-            id: `${id}`,
-            data: {
-                label,
-                content: ''
-            },
-            sourcePosition: 'right',
-            targetPosition: 'left',
-            position: {
-                x: x + 250,
-                y: y + 120
-            }
-        };
+        if (names_arr.length && node.data.links.length < names_arr.length) {
+            names_arr.forEach((el, i) => {
+                
+                const id = elements.length;
+                const label = el[0].slice(2, -2);
 
-        const params2 = {
-            id: `e${oldId}-${id}`,
-            source: `${oldId}`,
-            target: `${id}`
-        };
+                const params1 = {
+                    id: `${id}`,
+                    data: {
+                        label,
+                        content: ''
+                    },
+                    sourcePosition: 'right',
+                    targetPosition: 'left',
+                    position: {
+                        x: x + x_y[node.data.links.length + i].x,
+                        y: y + x_y[node.data.links.length + i].y
+                    }
+                };
 
-        if (a !== 1) {
-            dispatch({type: "ADD_ELEMENTS", payload: [params1, params2]});
+                const params2 = {
+                    id: `e${oldId}-${id}`,
+                    source: `${oldId}`,
+                    target: `${id}`
+                };
+
+
+                dispatch({type: "ADD_LINK", payload: {id: oldId, link: id}});
+                dispatch({type: "ADD_ELEMENTS", payload: [params1, params2]});
+            })
         }
+
+
+
+
     }
 
 
