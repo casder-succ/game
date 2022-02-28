@@ -7,11 +7,11 @@ const NodeEditor = ({node, onSubmit}) => {
     const dispatch = useDispatch();
     const {id, label, content} = useSelector(state => state.editorFields.fields);
 
+    console.log(node)
+
     if ((label === "" && node.id !== id) || (content === "" && node.id !== id) || node.id !== id) {
         dispatch({type: "INIT", payload: {label: node.data.label, content: node.data.content, id: node.id}});
     }
-
-    console .log(node)
 
     return (
         <div className='editor-wrapper'>
