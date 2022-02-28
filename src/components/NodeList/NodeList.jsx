@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import "./main.sass";
+import NewNodeForm from "./NewNodeForm";
 
 const NodeList = () => {
     const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const NodeList = () => {
                         );
                     })}
             </div>
+            <NewNodeForm els={elements}/>
         </div>
     );
 };
