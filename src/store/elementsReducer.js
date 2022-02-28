@@ -44,8 +44,14 @@ const elementsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 elements: state.elements.map((node) => {
+                    let content;
+                    state.elements.forEach(el => {
+                        if (el.id === action.payload.link) {
+                            content = el.data.label;
+                        }
+                    })
                     if (node.id === action.payload.id) {
-                        node.data.links.push(action.payload.link);
+                        node.data.links.push({id: action.payload.id, label: content});
                     }
                     return node;
                 })
@@ -64,8 +70,16 @@ const elementsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 elements: state.elements.map((node) => {
+                    let content;
+                    state.elements.forEach(el => {
+                        if (el.id === action.payload.content) {
+                            content = el.data.label;
+                        }
+                    })
+
                     if (node.id === action.payload.id) {
-                        node.data.content += action.payload.content;
+                        node.data.links.push({id: action.payload.id, label: content});
+                        node.data.content += `[[${content}]]`;
                     }
                     return node;
                 })
