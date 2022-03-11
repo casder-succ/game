@@ -30,6 +30,17 @@ const elementsReducer = (state = initialState, action) => {
                     return node;
                 })
             };
+        case "CHANGE_MEDIA":
+            return {
+                ...state,
+                elements: state.elements.map((node) => {
+                    if (node.id === action.payload.id) {
+                        node.data.media.video = action.payload.video;
+                        node.data.media.photo = action.payload.photo;
+                    }
+                    return node;
+                })
+            };
         case "CHANGE_CONTENT":
             return {
                 ...state,
@@ -73,7 +84,7 @@ const elementsReducer = (state = initialState, action) => {
                     let content;
                     state.elements.forEach(el => {
                         if (el.id === action.payload.content) {
-                            content = el.data.label;
+                            content = el.data.label || `id: ${el.id}`;
                         }
                     })
 
