@@ -5,10 +5,13 @@ let elements = [
         sourcePosition: 'right',
         targetPosition: 'left',
         data: {
-            label: 'Input Node',
-            title: 'Riner goes work',
+            label: 'Emma wakes up',
             content: 'Hello! This is the first node. \n [[Default Node]]',
             links: [{id: 2, label: 'Default Node'}],
+            media: {
+                photo: '',
+                video: '',
+            },
         },
 
         position: {x: 250, y: 420},
@@ -18,10 +21,13 @@ let elements = [
         sourcePosition: 'right',
         targetPosition: 'left',
         data: {
-            label: 'Default Node',
-            title: 'Riner meets Sandy',
+            label: 'Emma sends letter',
             content: 'Hello. I am the second node [[Node]] [[Node]]',
             links: [{id: 3, label: 'Node'}, {id: 4, label: 'Node'}],
+            media: {
+                photo: '',
+                video: '',
+            },
         },
 
         position: {x: 500, y: 420},
@@ -31,28 +37,18 @@ let elements = [
         sourcePosition: 'right',
         targetPosition: 'left',
         data: {
-            label: 'Node',
-            title: 'Sandy says yes',
+            label: 'Emma eats',
             content: '',
             links: [],
+            media: {
+                photo: '',
+                video: '',
+            },
         },
         position: {x: 790, y: 290},
     },
-    {
-        id: '4',
-        sourcePosition: 'right',
-        targetPosition: 'left',
-        data: {
-            label: 'Node',
-            title: 'Sandy says no',
-            content: '',
-            links: [],
-        },
-        position: {x: 790, y: 550},
-    },
     {id: 'e1-2', source: '1', target: '2',},
     {id: 'e2-3', source: '2', target: '3',},
-    {id: 'e2-4', source: '2', target: '4',},
 ];
 
 export default elements;

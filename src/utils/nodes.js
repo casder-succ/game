@@ -7,6 +7,10 @@ export function Node(position = {x: 20, y: 20}) {
         title: '',
         content: '',
         links: [],
+        media: {
+            photo: '',
+            video: '',
+        },
     };
-    this.position = position
+    this.position = position;
 }
