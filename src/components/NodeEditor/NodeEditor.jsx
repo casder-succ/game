@@ -6,9 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 const NodeEditor = ({node, onSubmit}) => {
     const dispatch = useDispatch();
     const {id, label, content, video, photo} = useSelector(state => state.editorFields.fields);
-
-    console.log(node)
-
+    
     if ((label === "" && node.id !== id) || (content === "" && node.id !== id) || node.id !== id) {
         dispatch({
             type: "INIT",

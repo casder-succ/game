@@ -34,7 +34,6 @@ const Graph = () => {
     }
 
     const onElementEdit = (label, content, node, photo, video) => {
-        console.log(node)
         if (photo !== currElem.data.media.photo || video !== currElem.data.media.video) {
             dispatch({type: "CHANGE_MEDIA", payload: {id: currElem.id, photo, video}});
         }
