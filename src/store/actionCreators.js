@@ -1,4 +1,14 @@
-import {INIT, UNSET, CHANGE_VIDEO, CHANGE_LABEL, CHANGE_PHOTO, CHANGE_CONTENT, SET_CURR, UNSET_CURR} from "./types";
+import {
+    INIT,
+    UNSET,
+    CHANGE_VIDEO,
+    CHANGE_LABEL,
+    CHANGE_PHOTO,
+    CHANGE_CONTENT,
+    SET_CURR,
+    UNSET_CURR,
+    REMOVE_ELEMENTS, CHANGE_MEDIA, UPDATE_CONTENT, ADD_ELEMENTS
+} from "./types";
 
 export const fieldsInit = (fields) => (
     {
@@ -10,28 +20,28 @@ export const fieldsInit = (fields) => (
 export const fieldsLabel = (label) => (
     {
         type: CHANGE_LABEL,
-        payload: { label }
+        payload: {label}
     }
 );
 
 export const fieldsContent = (content) => (
     {
         type: CHANGE_CONTENT,
-        payload: { content }
+        payload: {content}
     }
 );
 
 export const fieldsPhoto = (photo) => (
     {
         type: CHANGE_PHOTO,
-        payload: { photo }
+        payload: {photo}
     }
 );
 
 export const fieldsVideo = (video) => (
     {
         type: CHANGE_VIDEO,
-        payload: { video }
+        payload: {video}
     }
 );
 
@@ -54,3 +64,50 @@ export const currUnset = () => (
         type: UNSET_CURR,
     }
 );
+
+export const graphRemove = (elements) => (
+    {
+        type: REMOVE_ELEMENTS,
+        payload: elements,
+    }
+);
+
+export const graphMedia = (id, photo, video) => (
+    {
+        type: CHANGE_MEDIA,
+        payload: {id, photo, video}
+    }
+);
+
+export const graphLabel = (id, label) => (
+    {
+        type: CHANGE_LABEL,
+        payload: {id, label}
+    }
+);
+
+export const graphContent = (id, content) => (
+    {
+        type: CHANGE_CONTENT,
+        payload: {id, content}
+    }
+);
+
+export const graphContentUpdate = (id, content) => (
+    {
+        type: UPDATE_CONTENT,
+        payload: {id, content}
+    }
+);
+
+export const graphAddEls = (els) => (
+    {
+        type: ADD_ELEMENTS,
+        payload: els,
+    }
+);
+
+
+
+
+
