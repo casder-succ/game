@@ -1,3 +1,5 @@
+import {INIT, CHANGE_CONTENT, CHANGE_LABEL, CHANGE_VIDEO, CHANGE_PHOTO, UNSET} from "./types";
+
 const initialState = {
     fields: {
         id: "",
@@ -6,15 +8,15 @@ const initialState = {
         photo: "",
         video: "",
     }
-}
+};
+
+
 
 const editorFieldsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "INIT":
+        case INIT:
             return {
-                ...state,
                 fields: {
-                    ...initialState.fields,
                     id: action.payload.id,
                     label: action.payload.label,
                     content: action.payload.content,
@@ -22,18 +24,50 @@ const editorFieldsReducer = (state = initialState, action) => {
                     video: action.payload.video,
                 }
             };
-        case "CHANGE":
+
+        case CHANGE_LABEL:
             return {
-                ...state,
                 fields: {
-                    ...initialState.fields,
-                    id: action.payload.id,
-                    content: action.payload.content,
-                    label: action.payload.label,
-                    photo: action.payload.photo,
-                    video: action.payload.video,
+                    ...state.fields,
+                    label: action.payload.label
                 }
             };
+
+        case CHANGE_CONTENT:
+            return {
+                fields: {
+                    ...state.fields,
+                    content: action.payload.content
+                }
+            };
+
+        case CHANGE_PHOTO:
+            return {
+                fields: {
+                    ...state.fields,
+                    photo: action.payload.photo
+                }
+            };
+
+        case CHANGE_VIDEO:
+            return {
+                fields: {
+                    ...state.fields,
+                    video: action.payload.video
+                }
+            };
+        case UNSET:
+            return {
+                fields: {
+                    id: "",
+                    label: "",
+                    content: "",
+                    photo: "",
+                    video: "",
+                }
+            }
+
+
         default:
             return state;
     }
