@@ -26,6 +26,11 @@ const NodeEditor = ({node, onSubmit}) => {
         ));
     }
 
+    const onClick = (label, content, photo, video, node) => {
+        const params = {label, content, photo, video};
+        onSubmit(params, node);
+    }
+
     return (
         <div className='editor-wrapper'>
             <div className="node-editor">
@@ -70,7 +75,7 @@ const NodeEditor = ({node, onSubmit}) => {
                     </div>
                     <button className="node-editor-submit"
                             onClick={() => {
-                                onSubmit(label, content, node, photo, video);
+                                onClick(label, content, photo, video, node)
                                 dispatch(fieldsUnset());
                             }}>Submit
                     </button>
