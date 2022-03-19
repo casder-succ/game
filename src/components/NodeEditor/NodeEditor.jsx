@@ -5,7 +5,7 @@ import {
     fieldsPhoto,
     fieldsVideo,
     fieldsContent,
-    fieldsUnset
+    fieldsUnset, unsetDraggable
 } from "../../store/actionCreators";
 
 import './main.sass'
@@ -77,7 +77,8 @@ const NodeEditor = ({node, onSubmit}) => {
                     </div>
                     <button className="node-editor-submit"
                             onClick={() => {
-                                onClick(label, content, photo, video, node)
+                                onClick(label, content, photo, video, node);
+                                dispatch(unsetDraggable());
                                 dispatch(fieldsUnset());
                             }}>Submit
                     </button>

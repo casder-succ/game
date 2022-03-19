@@ -6,7 +6,7 @@ import {
     graphRemove,
     graphLabel,
     graphContent,
-    graphContentUpdate, graphAddEls
+    graphContentUpdate, graphAddEls, setDraggable
 } from "../store/actionCreators";
 
 export const onElementsRemove = (elementsToRemove, dispatch) => {
@@ -47,5 +47,6 @@ export const onElementEdit = (fields, node, currElem, dispatch) => {
     }
 
     dispatch(currUnset());
+    dispatch(setDraggable());
     document.getElementsByClassName('react-flow__pane')[0].click();
 }
