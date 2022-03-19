@@ -1,4 +1,4 @@
-import {SET_CURR, SET_DRAG, UNSET_CURR, UNSET_DRAG} from "./types";
+import {SET_DRAG, UNSET_DRAG} from "./types";
 
 const initialState = {
     isDraggable: true

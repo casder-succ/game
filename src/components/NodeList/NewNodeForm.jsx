@@ -17,7 +17,7 @@ const NewNodeForm = ({els}) => {
         }, {x: 0, y: 0})
         position.x += 150;
         position.y += 80;
-        const node = new NodeFlow(position);
+        const node = new NodeFlow(position.x, position.y);
 
         dispatch({type: "ADD_ELEMENTS", payload: [{...node}]});
     }

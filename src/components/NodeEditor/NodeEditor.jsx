@@ -14,9 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 const NodeEditor = ({node, onSubmit}) => {
     const dispatch = useDispatch();
     const {id, label, content, video, photo} = useSelector(state => state.editorFields.fields);
-
-    console.log(node)
-
+    
     if (node.id !== id) {
         dispatch(fieldsInit({
                 label: node.data.label,
@@ -77,8 +75,8 @@ const NodeEditor = ({node, onSubmit}) => {
                     </div>
                     <button className="node-editor-submit"
                             onClick={() => {
-                                onClick(label, content, photo, video, node);
                                 dispatch(unsetDraggable());
+                                onClick(label, content, photo, video, node);
                                 dispatch(fieldsUnset());
                             }}>Submit
                     </button>

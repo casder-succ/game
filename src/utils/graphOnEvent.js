@@ -47,6 +47,6 @@ export const onElementEdit = (fields, node, currElem, dispatch) => {
     }
 
     dispatch(currUnset());
-    dispatch(setDraggable());
     document.getElementsByClassName('react-flow__pane')[0].click();
+    dispatch(setDraggable());
 }
