@@ -1,4 +1,4 @@
-import {INIT, UNSET, CHANGE_VIDEO, CHANGE_LABEL, CHANGE_PHOTO, CHANGE_CONTENT} from "./types";
+import {INIT, UNSET, CHANGE_VIDEO, CHANGE_LABEL, CHANGE_PHOTO, CHANGE_CONTENT, SET_CURR, UNSET_CURR} from "./types";
 
 export const fieldsInit = (fields) => (
     {
@@ -39,4 +39,18 @@ export const fieldsUnset = () => (
     {
         type: UNSET,
     }
-)
+);
+
+export const currSet = (element) => (
+    {
+        type: SET_CURR,
+        payload: element
+
+    }
+);
+
+export const currUnset = () => (
+    {
+        type: UNSET_CURR,
+    }
+);
