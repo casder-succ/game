@@ -6,8 +6,8 @@ let elements = [
         targetPosition: 'left',
         data: {
             label: 'Emma wakes up',
-            content: 'Hello! This is the first node. \n [[Default Node]]',
-            links: [{id: 2, label: 'Default Node'}],
+            content: 'Hello! This is the first node.',
+            links: [{id: 2, label: 'Emma sends letter', position: "end"}],
             media: {
                 photo: '',
                 video: '',
@@ -22,8 +22,8 @@ let elements = [
         targetPosition: 'left',
         data: {
             label: 'Emma sends letter',
-            content: 'Hello. I am the second node [[Node]] [[Node]]',
-            links: [{id: 3, label: 'Node'}, {id: 4, label: 'Node'}],
+            content: 'Hello. I am the second node',
+            links: [{id: 3, label: 'Emma eats', position: "end"}],
             media: {
                 photo: '',
                 video: '',
