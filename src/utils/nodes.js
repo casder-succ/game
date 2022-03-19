@@ -1,9 +1,11 @@
-export function Node(position = {x: 20, y: 20}) {
-    this.id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
+const defaultID = `f${(~~(Math.random() * 1e8)).toString(16)}`;
+
+export function NodeFlow(x = 20, y = 20, label, id = defaultID) {
+    this.id = id;
     this.sourcePosition = 'right';
     this.targetPosition = 'left';
     this.data = {
-        label: '',
+        label,
         title: '',
         content: '',
         links: [],
@@ -12,5 +14,5 @@ export function Node(position = {x: 20, y: 20}) {
             video: '',
         },
     };
-    this.position = position;
+    this.position = {x, y};
 }

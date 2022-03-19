@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {Node} from '../../utils/nodes';
+import {NodeFlow} from '../../utils/nodes';
 
 import './main.sass';
 
@@ -17,7 +17,7 @@ const NewNodeForm = ({els}) => {
         }, {x: 0, y: 0})
         position.x += 150;
         position.y += 80;
-        const node = new Node(position);
+        const node = new NodeFlow(position);
 
         dispatch({type: "ADD_ELEMENTS", payload: [{...node}]});
     }
