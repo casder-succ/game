@@ -1,13 +1,21 @@
 import {parseElementContent} from "./parsing";
-import {currSet, currUnset} from "../store/actionCreators";
+import {
+    graphMedia,
+    currSet,
+    currUnset,
+    graphRemove,
+    graphLabel,
+    graphContent,
+    graphContentUpdate, graphAddEls
+} from "../store/actionCreators";
 
 export const onElementsRemove = (elementsToRemove, dispatch) => {
-    dispatch({type: "REMOVE_ELEMENTS", payload: elementsToRemove});
+    dispatch(graphRemove(elementsToRemove));
 };
 
 export const onConnect = (params, dispatch) => {
-    dispatch({type: "ADD_ELEMENTS", payload: [{...params, id: 'e' + params.source + '-' + params.target}]});
-    dispatch({type: "UPDATE_CONTENT", payload: {id: params.source, content: params.target}});
+    dispatch(graphAddEls([{...params, id: 'e' + params.source + '-' + params.target}]))
+    dispatch(graphContentUpdate(params.source, params.target));
 };
 
 export const onPaneClick = (dispatch) => {
@@ -24,28 +32,15 @@ export const onElementClick = (event, element, dispatch) => {
 
 export const onElementEdit = (fields, node, currElem, dispatch) => {
     if (fields.photo !== currElem.data.media.photo || fields.video !== currElem.data.media.video) {
-        dispatch({
-            type: "CHANGE_MEDIA",
-            payload: {
-                id: currElem.id,
-                photo: fields.photo,
-                video: fields.video
-            }
-        });
+        dispatch(graphMedia(currElem.id, fields.photo, fields.video));
     }
 
     if (fields.label !== currElem.data.label) {
-        dispatch({
-            type: "CHANGE_LABEL",
-            payload: {
-                id: currElem.id,
-                label: fields.label
-            }
-        });
+        dispatch(graphLabel(currElem.id, fields.label));
     }
 
     if (fields.content && fields.content !== currElem.data.content) {
-        dispatch({type: "CHANGE_CONTENT", payload: {id: currElem.id, content: fields.content}});
+        dispatch(graphContent(currElem.id, fields.content));
 
         parseElementContent(currElem.id, fields.content, node, currElem.position.x, currElem.position.y)
             .forEach(el => dispatch(el));

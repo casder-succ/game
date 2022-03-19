@@ -15,6 +15,8 @@ const NodeEditor = ({node, onSubmit}) => {
     const dispatch = useDispatch();
     const {id, label, content, video, photo} = useSelector(state => state.editorFields.fields);
 
+    console.log(node)
+
     if (node.id !== id) {
         dispatch(fieldsInit({
                 label: node.data.label,
