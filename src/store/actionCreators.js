@@ -7,7 +7,7 @@ import {
     CHANGE_CONTENT,
     SET_CURR,
     UNSET_CURR,
-    REMOVE_ELEMENTS, CHANGE_MEDIA, UPDATE_CONTENT, ADD_ELEMENTS
+    REMOVE_ELEMENTS, CHANGE_MEDIA, UPDATE_CONTENT, ADD_ELEMENTS, SET_DRAG, UNSET_DRAG
 } from "./types";
 
 export const fieldsInit = (fields) => (
@@ -107,6 +107,17 @@ export const graphAddEls = (els) => (
     }
 );
 
+export const setDraggable = () => (
+    {
+        type: SET_DRAG,
+    }
+);
+
+export const unsetDraggable = () => (
+    {
+        type: UNSET_DRAG,
+    }
+);
 
 
 
