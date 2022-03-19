@@ -1,4 +1,14 @@
 import initialElements from './graphElements';
+import {
+    ADD_ELEMENTS,
+    ADD_LINK,
+    CHANGE_CONTENT,
+    CHANGE_LABEL,
+    CHANGE_MEDIA,
+    CHANGE_TITLE,
+    REMOVE_ELEMENTS,
+    UPDATE_CONTENT
+} from "./types";
 
 const initialState = {
     elements: initialElements
@@ -6,7 +16,7 @@ const initialState = {
 
 const elementsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "ADD_ELEMENTS":
+        case ADD_ELEMENTS:
             return {
                 ...state,
                 elements: [
@@ -14,13 +24,13 @@ const elementsReducer = (state = initialState, action) => {
                     ...action.payload,
                 ],
             };
-        case "REMOVE_ELEMENTS":
+        case REMOVE_ELEMENTS:
             const ids = action.payload.map((el) => el.id);
             return {
                 ...state,
                 elements: state.elements.filter((el) => !ids.includes(el.id))
             };
-        case "CHANGE_LABEL":
+        case CHANGE_LABEL:
             return {
                 ...state,
                 elements: state.elements.map((node) => {
@@ -30,7 +40,7 @@ const elementsReducer = (state = initialState, action) => {
                     return node;
                 })
             };
-        case "CHANGE_MEDIA":
+        case CHANGE_MEDIA:
             return {
                 ...state,
                 elements: state.elements.map((node) => {
@@ -41,7 +51,7 @@ const elementsReducer = (state = initialState, action) => {
                     return node;
                 })
             };
-        case "CHANGE_CONTENT":
+        case CHANGE_CONTENT:
             return {
                 ...state,
                 elements: state.elements.map((node) => {
@@ -51,7 +61,7 @@ const elementsReducer = (state = initialState, action) => {
                     return node;
                 })
             };
-        case "ADD_LINK":
+        case ADD_LINK:
             return {
                 ...state,
                 elements: state.elements.map((node) => {
@@ -67,7 +77,7 @@ const elementsReducer = (state = initialState, action) => {
                     return node;
                 })
             };
-        case "CHANGE_TITLE":
+        case CHANGE_TITLE:
             return {
                 ...state,
                 elements: state.elements.map((node) => {
@@ -77,7 +87,7 @@ const elementsReducer = (state = initialState, action) => {
                     return node;
                 })
             };
-        case "UPDATE_CONTENT":
+        case UPDATE_CONTENT:
             return {
                 ...state,
                 elements: state.elements.map((node) => {
