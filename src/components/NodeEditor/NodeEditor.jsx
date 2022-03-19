@@ -1,4 +1,12 @@
 import React from 'react';
+import {
+    fieldsInit,
+    fieldsLabel,
+    fieldsPhoto,
+    fieldsVideo,
+    fieldsContent,
+    fieldsUnset
+} from "../../store/actionCreators";
 
 import './main.sass'
 import {useDispatch, useSelector} from "react-redux";
@@ -6,18 +14,16 @@ import {useDispatch, useSelector} from "react-redux";
 const NodeEditor = ({node, onSubmit}) => {
     const dispatch = useDispatch();
     const {id, label, content, video, photo} = useSelector(state => state.editorFields.fields);
-    
-    if ((label === "" && node.id !== id) || (content === "" && node.id !== id) || node.id !== id) {
-        dispatch({
-            type: "INIT",
-            payload: {
+
+    if (node.id !== id) {
+        dispatch(fieldsInit({
                 label: node.data.label,
                 content: node.data.content,
                 id: node.id,
                 photo: node.data.media.photo,
-                video: node.data.media.video
+                video: node.data.media.video,
             }
-        });
+        ));
     }
 
     return (
@@ -34,10 +40,7 @@ const NodeEditor = ({node, onSubmit}) => {
                             className='input__label'
                             type='text'
                             value={label}
-                            onChange={(event) => dispatch({
-                                type: "CHANGE",
-                                payload: {label: event.target.value, content, id, photo, video}
-                            })}
+                            onChange={(event) => dispatch(fieldsLabel(event.target.value))}
                         />
                     </div>
 
@@ -46,10 +49,7 @@ const NodeEditor = ({node, onSubmit}) => {
                         <textarea
                             className='input__content'
                             value={content}
-                            onChange={(event) => dispatch({
-                                type: "CHANGE",
-                                payload: {content: event.target.value, label, id, photo, video}
-                            })}
+                            onChange={(event) => dispatch(fieldsContent(event.target.value))}
                         />
                     </div>
                     <div className="node-editor__item">
@@ -57,10 +57,7 @@ const NodeEditor = ({node, onSubmit}) => {
                         <textarea
                             className='input__content'
                             value={photo}
-                            onChange={(event) => dispatch({
-                                type: "CHANGE",
-                                payload: {content, label, id, photo: event.target.value, video}
-                            })}
+                            onChange={(event) => dispatch(fieldsPhoto(event.target.value))}
                         />
                     </div>
                     <div className="node-editor__item">
@@ -68,13 +65,14 @@ const NodeEditor = ({node, onSubmit}) => {
                         <textarea
                             className='input__content'
                             value={video}
-                            onChange={(event) => dispatch({
-                                type: "CHANGE",
-                                payload: {content, label, id, photo, video: event.target.value}
-                            })}
+                            onChange={(event) => dispatch(fieldsVideo(event.target.value))}
                         />
                     </div>
-                    <button className="node-editor-submit" onClick={() => onSubmit(label, content, node, photo, video)}>Submit
+                    <button className="node-editor-submit"
+                            onClick={() => {
+                                onSubmit(label, content, node, photo, video);
+                                dispatch(fieldsUnset());
+                            }}>Submit
                     </button>
                 </div>
             </div>
