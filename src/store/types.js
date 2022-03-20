@@ -13,6 +13,7 @@ export const REMOVE_ELEMENTS = "REMOVE_ELEMENTS";
 export const CHANGE_MEDIA = "CHANGE_MEDIA";
 export const CHANGE_TITLE = "CHANGE_TITLE";
 export const ADD_LINK = "ADD_LINK";
+export const REMOVE_LINK = "REMOVE_LINK";
 export const UPDATE_CONTENT = "UPDATE_CONTENT";
 
 export const SET_DRAG = "SET_DRAG";
