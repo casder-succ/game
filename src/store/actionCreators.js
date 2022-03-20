@@ -7,7 +7,7 @@ import {
     CHANGE_CONTENT,
     SET_CURR,
     UNSET_CURR,
-    REMOVE_ELEMENTS, CHANGE_MEDIA, UPDATE_CONTENT, ADD_ELEMENTS, SET_DRAG, UNSET_DRAG, ADD_LINK
+    REMOVE_ELEMENTS, CHANGE_MEDIA, UPDATE_CONTENT, ADD_ELEMENTS, SET_DRAG, UNSET_DRAG, ADD_LINK, REMOVE_LINK
 } from "./types";
 
 export const fieldsInit = (fields) => (
@@ -123,6 +123,15 @@ export const graphAddLink = (params) => (
     {
         type: ADD_LINK,
         payload: params,
+    }
+);
+
+export const graphRemoveLink = (id) => (
+    {
+        type: REMOVE_LINK,
+        payload: {
+            id
+        }
     }
 );
 

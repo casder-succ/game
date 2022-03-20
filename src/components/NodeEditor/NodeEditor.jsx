@@ -5,7 +5,7 @@ import {
     fieldsPhoto,
     fieldsVideo,
     fieldsContent,
-    fieldsUnset, unsetDraggable, graphRemove, currUnset
+    fieldsUnset, unsetDraggable, graphRemove, currUnset, graphRemoveLink
 } from "../../store/actionCreators";
 
 import './main.sass'
@@ -83,6 +83,7 @@ const NodeEditor = ({node, onSubmit}) => {
                             onClick={() => {
                                 dispatch(currUnset());
                                 dispatch(graphRemove([node]));
+                                dispatch(graphRemoveLink(node.id));
                             }}
                         >
                             Delete node
