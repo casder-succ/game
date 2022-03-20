@@ -7,7 +7,7 @@ import {
     CHANGE_CONTENT,
     SET_CURR,
     UNSET_CURR,
-    REMOVE_ELEMENTS, CHANGE_MEDIA, UPDATE_CONTENT, ADD_ELEMENTS, SET_DRAG, UNSET_DRAG
+    REMOVE_ELEMENTS, CHANGE_MEDIA, UPDATE_CONTENT, ADD_ELEMENTS, SET_DRAG, UNSET_DRAG, ADD_LINK
 } from "./types";
 
 export const fieldsInit = (fields) => (
@@ -116,6 +116,13 @@ export const setDraggable = () => (
 export const unsetDraggable = () => (
     {
         type: UNSET_DRAG,
+    }
+);
+
+export const graphAddLink = (params) => (
+    {
+        type: ADD_LINK,
+        payload: params,
     }
 );
 
