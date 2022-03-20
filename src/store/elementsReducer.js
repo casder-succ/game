@@ -6,7 +6,7 @@ import {
     CHANGE_LABEL,
     CHANGE_MEDIA,
     CHANGE_TITLE,
-    REMOVE_ELEMENTS,
+    REMOVE_ELEMENTS, REMOVE_LINK,
     UPDATE_CONTENT
 } from "./types";
 
@@ -105,6 +105,14 @@ const elementsReducer = (state = initialState, action) => {
                     return node;
                 })
             };
+        case REMOVE_LINK:
+            return {
+                ...state,
+                elements: state.elements.map((node) => {
+                    node.data.links = node.data.links.filter(link => !(link.id === action.payload.id));
+                    return node;
+                })
+            }
         default:
             return state;
     }
