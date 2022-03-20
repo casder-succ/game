@@ -13,9 +13,6 @@
     row-gap: 25px
     margin: 50px 20px 0
 
-    input
-      padding-left: 10px
-      border: none
 
     .input__label
       height: 25px
@@ -31,11 +28,30 @@
     flex-direction: column
     row-gap: 12px
 
-  &-submit
-    background: #ffffff
-    font-size: 18px
-    padding: 10px 0
-    cursor: pointer
+
+.editor_button
+  border: none
+  border-radius: 10px
+  padding: 10px 0
+  cursor: pointer
+  background: #ffffff
+  font-size: 18px
+  width: 100%
+
+.editor_controls
+  display: flex
+  flex-wrap: nowrap
+  column-gap: 20px
 
 textarea
   resize: none
+
+input, textarea
+  outline: none
+  border-radius: 10px
+  padding: 10px 0 10px 15px
+  border: none
+
+.photo textarea,
+.video textarea
+  max-height: 50px

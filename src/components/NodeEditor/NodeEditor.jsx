@@ -5,7 +5,7 @@ import {
     fieldsPhoto,
     fieldsVideo,
     fieldsContent,
-    fieldsUnset, unsetDraggable
+    fieldsUnset, unsetDraggable, graphRemove, currUnset
 } from "../../store/actionCreators";
 
 import './main.sass'
@@ -57,29 +57,37 @@ const NodeEditor = ({node, onSubmit}) => {
                             onChange={(event) => dispatch(fieldsContent(event.target.value))}
                         />
                     </div>
-                    <div className="node-editor__item">
+                    <div className="node-editor__item photo">
                         <label>Photo</label>
                         <textarea
-                            className='input__content'
                             value={photo}
                             onChange={(event) => dispatch(fieldsPhoto(event.target.value))}
                         />
                     </div>
-                    <div className="node-editor__item">
+                    <div className="node-editor__item video">
                         <label>Video</label>
                         <textarea
-                            className='input__content'
                             value={video}
                             onChange={(event) => dispatch(fieldsVideo(event.target.value))}
                         />
                     </div>
-                    <button className="node-editor-submit"
+                    <div className="editor_controls">
+                        <button className="node-editor-submit editor_button"
+                                onClick={() => {
+                                    dispatch(unsetDraggable());
+                                    onClick(label, content, photo, video, node);
+                                    dispatch(fieldsUnset());
+                                }}>Submit
+                        </button>
+                        <button className="editor_button"
                             onClick={() => {
-                                dispatch(unsetDraggable());
-                                onClick(label, content, photo, video, node);
-                                dispatch(fieldsUnset());
-                            }}>Submit
-                    </button>
+                                dispatch(currUnset());
+                                dispatch(graphRemove([node]));
+                            }}
+                        >
+                            Delete node
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
