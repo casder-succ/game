@@ -5,7 +5,7 @@ import {
     CHANGE_CONTENT,
     CHANGE_LABEL,
     CHANGE_MEDIA,
-    CHANGE_TITLE,
+    CHANGE_TITLE, REMOVE_BY_ID,
     REMOVE_ELEMENTS, REMOVE_LINK, SET_CURRENT_A, UNSET_CURRENT_A,
     UPDATE_CONTENT
 } from "./types";
@@ -30,7 +30,21 @@ const elementsReducer = (state = initialState, action) => {
                 ...state,
                 elements: state.elements
                     .filter((el) => !ids.includes(el.id))
-                    .filter((el) => !el.id.endsWith(action.payload[0].id))
+                    .filter((el) => !(el.id.endsWith(action.payload[0].id) || el.id.startsWith(`e${action.payload[0].id}`)))
+            };
+        case REMOVE_BY_ID:
+            return {
+                ...state,
+                elements: state.elements
+                    .filter((el) => {
+                            if ('' + el.id === '' + action.payload.id) {
+                                return false;
+                            }
+
+                            return ((!(el.id.startsWith(`e`) && (el.id.endsWith('' + action.payload.id) || el.id.startsWith(action.payload.id)))));
+
+                        }
+                    )
             };
         case CHANGE_LABEL:
             return {
@@ -111,9 +125,13 @@ const elementsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 elements: state.elements.map((node) => {
-                    if (node.data) {
-                        node.data.links = node.data.links.filter(link => !(link.id === action.payload.id));
+                    let link;
+                    if (node.data && (link = node.data.links.find(link => ('' + link.id === '' + action.payload.id)))) {
+                        node.data.links = node.data.links.filter(link => !('' + link.id === '' + action.payload.id));
+                        const tmp = node.data.content.split(link.label);
+                        node.data.content = tmp[0].substring(0, -2) + tmp[1].substring(2);
                     }
+
                     return node;
                 })
             };
