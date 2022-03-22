@@ -12,6 +12,7 @@ let elements = [
                 photo: '',
                 video: '',
             },
+            isActive: false,
         },
 
         position: {x: 250, y: 420},
@@ -28,6 +29,7 @@ let elements = [
                 photo: '',
                 video: '',
             },
+            isActive: false,
         },
 
         position: {x: 500, y: 420},
@@ -44,6 +46,7 @@ let elements = [
                 photo: '',
                 video: '',
             },
+            isActive: false,
         },
         position: {x: 790, y: 290},
     },
