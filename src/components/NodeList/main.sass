@@ -17,17 +17,18 @@
     margin: 20px
 
   &-item
+    border: 5px solid transparent
     background: #ffffff
     font-size: 16px
     padding: 20px
     margin-bottom: 10px
     border-radius: 20px
     cursor: pointer
-    transition: all .5s
+    transition: border-color .5s, transform .5s
 
   .active-true
     transform: translateX(-50px)
-    border: 5px solid #8bcfd2
+    border-color: #8bcfd2
 
 .create-form
   width: 80%
