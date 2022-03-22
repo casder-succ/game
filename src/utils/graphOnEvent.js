@@ -6,7 +6,7 @@ import {
     graphRemove,
     graphLabel,
     graphContent,
-    graphContentUpdate, graphAddEls, setDraggable
+    graphContentUpdate, graphAddEls, setDraggable, graphSetCurrent, graphUnsetCurrent
 } from "../store/actionCreators";
 
 export const onElementsRemove = (elementsToRemove, dispatch) => {
@@ -20,6 +20,7 @@ export const onConnect = (params, dispatch) => {
 
 export const onPaneClick = (dispatch) => {
     dispatch(currUnset());
+    dispatch(graphUnsetCurrent());
 };
 
 export const onElementClick = (event, element, dispatch) => {
@@ -27,6 +28,7 @@ export const onElementClick = (event, element, dispatch) => {
 
     if (!(element.id.startsWith("e"))) {
         dispatch(currSet(element));
+        dispatch(graphSetCurrent(element.id));
     }
 }
 
@@ -47,6 +49,7 @@ export const onElementEdit = (fields, node, currElem, dispatch) => {
     }
 
     dispatch(currUnset());
+    dispatch(graphUnsetCurrent(currElem.id));
     document.getElementsByClassName('react-flow__pane')[0].click();
     dispatch(setDraggable());
 }
