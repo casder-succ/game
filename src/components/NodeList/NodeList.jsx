@@ -24,7 +24,7 @@ const NodeList = () => {
                     .filter((element) => !element.id.startsWith('e'))
                     .map((element, i) => {
                         return (
-                            <div key={i + 1} className="node-list-item" onClick={() => onElementClick(element.id)}>
+                            <div key={i + 1} className={`node-list-item active-${element.data.isActive}`} onClick={() => onElementClick(element.id)}>
                                 {element.data.label}
                             </div>
                         );
