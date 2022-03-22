@@ -28,7 +28,9 @@ const elementsReducer = (state = initialState, action) => {
             const ids = action.payload.map((el) => el.id);
             return {
                 ...state,
-                elements: state.elements.filter((el) => !ids.includes(el.id))
+                elements: state.elements
+                    .filter((el) => !ids.includes(el.id))
+                    .filter((el) => !el.id.endsWith(action.payload[0].id))
             };
         case CHANGE_LABEL:
             return {

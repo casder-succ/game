@@ -6,7 +6,7 @@ let elements = [
         targetPosition: 'left',
         data: {
             label: 'Emma wakes up',
-            content: 'Hello! This is the first node.',
+            content: 'Hello! This is the first node. [[Emma sends letter]]',
             links: [{id: 2, label: 'Emma sends letter', position: "end"}],
             media: {
                 photo: '',
@@ -23,7 +23,7 @@ let elements = [
         targetPosition: 'left',
         data: {
             label: 'Emma sends letter',
-            content: 'Hello. I am the second node',
+            content: 'Hello. I am the second node [[Emma eats]]',
             links: [{id: 3, label: 'Emma eats', position: "end"}],
             media: {
                 photo: '',
