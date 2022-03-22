@@ -15,7 +15,7 @@ import {
     UNSET_DRAG,
     ADD_LINK,
     REMOVE_LINK,
-    SET_CURRENT_A, UNSET_CURRENT_A
+    SET_CURRENT_A, UNSET_CURRENT_A, REMOVE_BY_ID
 } from "./types";
 
 export const fieldsInit = (fields) => (
@@ -161,6 +161,11 @@ export const graphUnsetCurrent = (id) => (
     }
 );
 
-
-
-
+export const graphRemoveById = (id) => (
+    {
+        type: REMOVE_BY_ID,
+        payload: {
+            id
+        }
+    }
+);
