@@ -109,7 +109,9 @@ const elementsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 elements: state.elements.map((node) => {
-                    node.data.links = node.data.links.filter(link => !(link.id === action.payload.id));
+                    if (node.data) {
+                        node.data.links = node.data.links.filter(link => !(link.id === action.payload.id));
+                    }
                     return node;
                 })
             };
