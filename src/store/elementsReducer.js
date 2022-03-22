@@ -116,19 +116,28 @@ const elementsReducer = (state = initialState, action) => {
         case SET_CURRENT_A:
             return {
                 ...state,
-                elements: state.elements.map((node) => {
-                    if (node.id === action.payload.id) {
-                        node.data.isActive = true;
-                    }
-                })
+                elements: state.elements
+                    .map((node) => {
+                        if (node.data) {
+                            node.data.isActive = false;
+                        }
+                        return node;
+                    })
+                    .map((node) => {
+                        if (node.id === action.payload.id) {
+                            node.data.isActive = true;
+                        }
+                        return node;
+                    })
             };
         case UNSET_CURRENT_A:
             return {
                 ...state,
                 elements: state.elements.map((node) => {
-                    if (node.id === action.payload.id) {
+                    if (node.data) {
                         node.data.isActive = false;
                     }
+                    return node;
                 })
             }
         default:

@@ -7,7 +7,15 @@ import {
     CHANGE_CONTENT,
     SET_CURR,
     UNSET_CURR,
-    REMOVE_ELEMENTS, CHANGE_MEDIA, UPDATE_CONTENT, ADD_ELEMENTS, SET_DRAG, UNSET_DRAG, ADD_LINK, REMOVE_LINK
+    REMOVE_ELEMENTS,
+    CHANGE_MEDIA,
+    UPDATE_CONTENT,
+    ADD_ELEMENTS,
+    SET_DRAG,
+    UNSET_DRAG,
+    ADD_LINK,
+    REMOVE_LINK,
+    SET_CURRENT_A, UNSET_CURRENT_A
 } from "./types";
 
 export const fieldsInit = (fields) => (
@@ -129,6 +137,24 @@ export const graphAddLink = (params) => (
 export const graphRemoveLink = (id) => (
     {
         type: REMOVE_LINK,
+        payload: {
+            id
+        }
+    }
+);
+
+export const graphSetCurrent = (id) => (
+    {
+        type: SET_CURRENT_A,
+        payload: {
+            id
+        }
+    }
+);
+
+export const graphUnsetCurrent = (id) => (
+    {
+        type: UNSET_CURRENT_A,
         payload: {
             id
         }
