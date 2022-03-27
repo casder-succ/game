@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import {NodeFlow} from '../../utils/nodes';
 
 import './main.sass';
+import {NODES__ADD_NODES} from "../../store/types";
 
 const NewNodeForm = ({els}) => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const NewNodeForm = ({els}) => {
         position.y += 80;
         const node = new NodeFlow(position.x, position.y);
 
-        dispatch({type: "ADD_ELEMENTS", payload: [{...node}]});
+        dispatch({type: NODES__ADD_NODES, payload: [{...node}]});
     }
 
     return (
