@@ -7,10 +7,10 @@ import {currSet, graphSetCurrent} from "../../store/actionCreators";
 
 const NodeList = () => {
     const dispatch = useDispatch();
-    const elements = useSelector(state => state.elements.elements);
+    const nodes = useSelector(state => state.nodes.nodes);
 
     const onElementClick = (id) => {
-        const [params] = elements.filter((element) => element.id === id);
+        const [params] = nodes.filter((element) => element.id === id);
         dispatch(currSet(params));
         dispatch(graphSetCurrent(params.id));
 
@@ -23,8 +23,7 @@ const NodeList = () => {
             <h2 className="node-list-title">Nodes:</h2>
             <div className="node-list-items">
 
-                {elements
-                    .filter((element) => !element.id.startsWith('e'))
+                {nodes
                     .map((element, i) => {
                         return (
                             <div key={i + 1} className={`node-list-item active-${element.data?.isActive || 'false'}`}
@@ -34,7 +33,7 @@ const NodeList = () => {
                         );
                     })}
             </div>
-            <NewNodeForm els={elements}/>
+            <NewNodeForm els={nodes}/>
         </div>
     );
 };
