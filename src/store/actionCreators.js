@@ -15,7 +15,7 @@ import {
     UNSET_DRAG,
     ADD_LINK,
     REMOVE_LINK,
-    SET_CURRENT_A, UNSET_CURRENT_A, REMOVE_BY_ID
+    SET_CURRENT_A, UNSET_CURRENT_A, REMOVE_BY_ID, EDGES__ADD_EDGE
 } from "./types";
 
 export const fieldsInit = (fields) => (
@@ -166,6 +166,13 @@ export const graphRemoveById = (id) => (
         type: REMOVE_BY_ID,
         payload: {
             id
-        }
+        },
     }
 );
+
+export const graphAddEdge = (edge) => (
+    {
+        type: EDGES__ADD_EDGE,
+        payload: edge,
+    }
+)

@@ -11,7 +11,8 @@ import {
 } from "./types";
 
 const initialState = {
-    elements: initialElements
+    nodes: initialElements.nodes,
+    edges: initialElements.edges,
 }
 
 const elementsReducer = (state = initialState, action) => {
