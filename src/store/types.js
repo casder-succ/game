@@ -8,9 +8,19 @@ export const UNSET = "UNSET";
 export const SET_CURR = "SET_CURR";
 export const UNSET_CURR = "UNSET_CURR";
 
+export const NODES__ADD_NODES = "ADD_NODES";
+export const NODES__REMOVE_NODES = "REMOVE_NODES";
+export const NODES__SET_CURRENT = "SET_CURRENT";
+export const NODES__UNSET_CURRENT = "UNSET_CURRENT";
+export const NODES__CHANGE_MEDIA = "CHANGE_MEDIA";
+
+export const EDGES__ADD_EDGES = "ADD_EDGES";
+export const EDGES__ADD_EDGE = "ADD_EDGE";
+export const EDGES__REMOVE_EDGE = "REMOVE_EDGE";
+export const EDGES__REMOVE_EDGES = "REMOVE_EDGES";
+
 export const ADD_ELEMENTS = "ADD_ELEMENTS";
 export const REMOVE_ELEMENTS = "REMOVE_ELEMENTS";
-export const CHANGE_MEDIA = "CHANGE_MEDIA";
 export const CHANGE_TITLE = "CHANGE_TITLE";
 export const ADD_LINK = "ADD_LINK";
 export const REMOVE_LINK = "REMOVE_LINK";

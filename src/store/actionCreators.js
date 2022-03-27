@@ -8,14 +8,20 @@ import {
     SET_CURR,
     UNSET_CURR,
     REMOVE_ELEMENTS,
-    CHANGE_MEDIA,
+    NODES__CHANGE_MEDIA,
     UPDATE_CONTENT,
     ADD_ELEMENTS,
     SET_DRAG,
     UNSET_DRAG,
     ADD_LINK,
     REMOVE_LINK,
-    SET_CURRENT_A, UNSET_CURRENT_A, REMOVE_BY_ID, EDGES__ADD_EDGE
+    SET_CURRENT_A,
+    UNSET_CURRENT_A,
+    REMOVE_BY_ID,
+    EDGES__ADD_EDGE,
+    EDGES__REMOVE_EDGES,
+    NODES__REMOVE_NODES,
+    NODES__SET_CURRENT, NODES__UNSET_CURRENT
 } from "./types";
 
 export const fieldsInit = (fields) => (
@@ -80,9 +86,9 @@ export const graphRemove = (elements) => (
     }
 );
 
-export const graphMedia = (id, photo, video) => (
+export const nodesMedia = (id, photo, video) => (
     {
-        type: CHANGE_MEDIA,
+        type: NODES__CHANGE_MEDIA,
         payload: {id, photo, video}
     }
 );
@@ -145,7 +151,7 @@ export const graphRemoveLink = (id) => (
 
 export const graphSetCurrent = (id) => (
     {
-        type: SET_CURRENT_A,
+        type: NODES__SET_CURRENT,
         payload: {
             id
         }
@@ -154,7 +160,7 @@ export const graphSetCurrent = (id) => (
 
 export const graphUnsetCurrent = (id) => (
     {
-        type: UNSET_CURRENT_A,
+        type: NODES__UNSET_CURRENT,
         payload: {
             id
         }
@@ -176,3 +182,18 @@ export const graphAddEdge = (edge) => (
         payload: edge,
     }
 )
+
+export const removeNodes = (nodes) => (
+    {
+        type: NODES__REMOVE_NODES,
+        payload: nodes,
+    }
+);
+
+export const removeEdges = (edges) => (
+    {
+        type: EDGES__REMOVE_EDGES,
+        payload: edges,
+    }
+);
+
