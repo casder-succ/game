@@ -4,8 +4,8 @@ import {
     ADD_LINK,
     CHANGE_CONTENT,
     CHANGE_LABEL,
-    CHANGE_MEDIA,
-    CHANGE_TITLE, EDGES__ADD_EDGE, EDGES__ADD_EDGES, EDGES__REMOVE_EDGE, REMOVE_BY_ID,
+    NODES__CHANGE_MEDIA,
+    CHANGE_TITLE, EDGES__ADD_EDGE, EDGES__ADD_EDGES, EDGES__REMOVE_EDGE, EDGES__REMOVE_EDGES, REMOVE_BY_ID,
     REMOVE_ELEMENTS, REMOVE_LINK, SET_CURRENT_A, UNSET_CURRENT_A,
     UPDATE_CONTENT
 } from "./types";
@@ -37,6 +37,13 @@ const edgesReducer = (state = initialState, action) => {
                 ],
             };
 
+        case EDGES__REMOVE_EDGES:
+            const idList = action.payload.map(el => el.id);
+            return {
+                edges: [
+                    ...state.edges.filter(edge => !idList.find(id => id === edge.id)),
+                ],
+            };
         // case REMOVE_ELEMENTS:
         //     const ids = action.payload.map((el) => el.id);
         //     return {
@@ -70,16 +77,7 @@ const edgesReducer = (state = initialState, action) => {
         //         })
         //     };
         // case CHANGE_MEDIA:
-        //     return {
-        //         ...state,
-        //         elements: state.elements.map((node) => {
-        //             if (node.id === action.payload.id) {
-        //                 node.data.media.video = action.payload.video;
-        //                 node.data.media.photo = action.payload.photo;
-        //             }
-        //             return node;
-        //         })
-        //     };
+
         // case CHANGE_CONTENT:
         //     return {
         //         ...state,
