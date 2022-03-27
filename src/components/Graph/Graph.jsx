@@ -11,7 +11,7 @@ import './main.sass'
 
 const Graph = () => {
     const dispatch = useDispatch();
-    const elements = useSelector(state => state.elements.elements);
+    const elements = useSelector(state => ([...state.nodes.nodes, ...state.edges.edges]));
     const currElem = useSelector(state => state.currElement.currElem);
     const isDraggable = useSelector(state => state.controls.isDraggable);
 
@@ -19,8 +19,9 @@ const Graph = () => {
         <div className='graphField'>
             <ReactFlow
                 elements={elements}
+
                 onElementsRemove={(elements) => onElementsRemove(elements, dispatch)}
-                onConnect={(params) => onConnect(params, dispatch)}
+                onConnect={(edge) => onConnect(edge, dispatch)}
                 deleteKeyCode={46}
 
                 nodesDraggable={isDraggable}
