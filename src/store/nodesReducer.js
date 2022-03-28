@@ -4,7 +4,12 @@ import {
     NODES__ADD_NODES,
     NODES__UNSET_CURRENT,
     NODES__CHANGE_MEDIA,
-    NODES__SET_CURRENT, NODES__NEW_NODE, NODES__CHANGE_CONTENT, NODES__CHANGE_LABEL, NODES__ON_CONNECT
+    NODES__SET_CURRENT,
+    NODES__NEW_NODE,
+    NODES__CHANGE_CONTENT,
+    NODES__CHANGE_LABEL,
+    NODES__ON_CONNECT,
+    NODES__REMOVE_NODE
 } from "./types";
 
 const initialState = {
@@ -23,9 +28,11 @@ const nodesReducer = (state = initialState, action) => {
         case NODES__REMOVE_NODES:
             const idList = action.payload.map(node => node.id);
             return {
-                nodes: [
-                    ...state.nodes.filter(node => !idList.find(id => id === node.id)),
-                ],
+                nodes: state.nodes.filter(node => !idList.find(id => id === node.id)),
+            };
+        case NODES__REMOVE_NODE:
+            return {
+                nodes: state.nodes.filter(node => node.id !== action.payload.id),
             };
         case NODES__SET_CURRENT:
             return {

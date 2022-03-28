@@ -5,7 +5,7 @@ import {
     fieldsPhoto,
     fieldsVideo,
     fieldsContent,
-    fieldsUnset, unsetDraggable, graphRemove, currUnset, graphRemoveLink
+    fieldsUnset, unsetDraggable, currUnset, graphRemoveLink, removeNode, removeEdgesTo, removeEdgesFrom
 } from "../../store/actionCreators";
 
 import './main.sass'
@@ -35,10 +35,6 @@ const NodeEditor = ({node, onSubmit}) => {
         <div className='editor-wrapper'>
             <div className="node-editor">
                 <div className="node-editor__content">
-                    <div className="node-editor__item">
-                        Id: {id}
-                    </div>
-
                     <div className="node-editor__item">
                         <label>Title:</label>
                         <input
@@ -74,7 +70,6 @@ const NodeEditor = ({node, onSubmit}) => {
                     <div className="editor_controls">
                         <button className="node-editor-submit editor_button"
                                 onClick={() => {
-                                    dispatch(unsetDraggable());
                                     onClick(label, content, photo, video, node);
                                     dispatch(fieldsUnset());
                                 }}>Submit
@@ -82,8 +77,10 @@ const NodeEditor = ({node, onSubmit}) => {
                         <button className="editor_button"
                             onClick={() => {
                                 dispatch(currUnset());
-                                dispatch(graphRemove([node]));
+                                dispatch(removeNode(node.id));
                                 dispatch(graphRemoveLink(node.id));
+                                dispatch(removeEdgesTo(node.id));
+                                dispatch(removeEdgesFrom(node.id));
                             }}
                         >
                             Delete node

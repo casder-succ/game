@@ -1,6 +1,6 @@
 import initialElements from './graphElements';
 import {
-    EDGES__ADD_EDGE, EDGES__ADD_EDGES, EDGES__REMOVE_EDGE, EDGES__REMOVE_EDGES,
+    EDGES__ADD_EDGE, EDGES__ADD_EDGES, EDGES__REMOVE_EDGE, EDGES__REMOVE_EDGES, EDGES__REMOVE_FROM, EDGES__REMOVE_TO,
 } from "./types";
 
 const initialState = {
@@ -36,6 +36,14 @@ const edgesReducer = (state = initialState, action) => {
                 edges: [
                     ...state.edges.filter(edge => !idList.find(id => id === edge.id)),
                 ],
+            };
+        case EDGES__REMOVE_FROM:
+            return {
+                edges: state.edges.filter(edge => !edge.id.startsWith(`e${action.payload.id}`)),
+            };
+        case EDGES__REMOVE_TO:
+            return {
+                edges: state.edges.filter(edge => !edge.id.endsWith(`${action.payload.id}`)),
             };
         // case REMOVE_ELEMENTS:
         //     const ids = action.payload.map((el) => el.id);

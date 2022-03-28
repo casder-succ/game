@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { Handle } from 'react-flow-renderer';
 import "./main.sass"
 
-export default memo(({ data }) => {
+const CustomTextNode = ({ data }) => {
     return (
         <div className="custom-node">
             <Handle
@@ -23,4 +23,6 @@ export default memo(({ data }) => {
 
         </div>
     );
-});
+};
+
+export default CustomTextNode;

@@ -11,12 +11,8 @@ const NodeList = () => {
 
     const onElementClick = (id) => {
         const [params] = nodes.filter((element) => element.id === id);
-        const [element] = Array.from(document.getElementsByClassName('react-flow__node')).filter((el) => el.getAttribute("data-id") === id);
-
-        dispatch(unsetDraggable());
         dispatch(currSet(params));
         dispatch(graphSetCurrent(params.id));
-        setTimeout(() => element.click(), 50)
     }
 
     return (

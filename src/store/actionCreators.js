@@ -19,179 +19,130 @@ import {
     EDGES__ADD_EDGE,
     EDGES__REMOVE_EDGES,
     NODES__REMOVE_NODES,
-    NODES__SET_CURRENT, NODES__UNSET_CURRENT, NODES__CHANGE_LABEL, NODES__CHANGE_CONTENT
+    NODES__SET_CURRENT,
+    NODES__UNSET_CURRENT,
+    NODES__CHANGE_LABEL,
+    NODES__CHANGE_CONTENT,
+    NODES__REMOVE_NODE, EDGES__REMOVE_FROM, EDGES__REMOVE_TO
 } from "./types";
 
-export const fieldsInit = (fields) => (
-    {
-        type: INIT,
-        payload: fields,
-    }
-);
+export const fieldsInit = (fields) => ({
+        type: INIT, payload: fields,
+    });
 
-export const fieldsLabel = (label) => (
-    {
-        type: CHANGE_LABEL,
-        payload: {label}
-    }
-);
+export const fieldsLabel = (label) => ({
+        type: CHANGE_LABEL, payload: {label}
+    });
 
-export const fieldsContent = (content) => (
-    {
-        type: CHANGE_CONTENT,
-        payload: {content}
-    }
-);
+export const fieldsContent = (content) => ({
+        type: CHANGE_CONTENT, payload: {content}
+    });
 
-export const fieldsPhoto = (photo) => (
-    {
-        type: CHANGE_PHOTO,
-        payload: {photo}
-    }
-);
+export const fieldsPhoto = (photo) => ({
+        type: CHANGE_PHOTO, payload: {photo}
+    });
 
-export const fieldsVideo = (video) => (
-    {
-        type: CHANGE_VIDEO,
-        payload: {video}
-    }
-);
+export const fieldsVideo = (video) => ({
+        type: CHANGE_VIDEO, payload: {video}
+    });
 
-export const fieldsUnset = () => (
-    {
+export const fieldsUnset = () => ({
         type: UNSET,
-    }
-);
+    });
 
-export const currSet = (element) => (
-    {
-        type: SET_CURR,
-        payload: element
+export const currSet = (element) => ({
+        type: SET_CURR, payload: element
 
-    }
-);
+    });
 
-export const currUnset = () => (
-    {
+export const currUnset = () => ({
         type: UNSET_CURR,
-    }
-);
+    });
 
-export const graphRemove = (elements) => (
-    {
-        type: REMOVE_ELEMENTS,
-        payload: elements,
-    }
-);
+export const graphRemove = (elements) => ({
+        type: REMOVE_ELEMENTS, payload: elements,
+    });
 
-export const nodesMedia = (id, photo, video) => (
-    {
-        type: NODES__CHANGE_MEDIA,
-        payload: {id, photo, video}
-    }
-);
+export const nodesMedia = (id, photo, video) => ({
+        type: NODES__CHANGE_MEDIA, payload: {id, photo, video}
+    });
 
-export const nodesLabel = (id, label) => (
-    {
-        type: NODES__CHANGE_LABEL,
-        payload: {id, label}
-    }
-);
+export const nodesLabel = (id, label) => ({
+        type: NODES__CHANGE_LABEL, payload: {id, label}
+    });
 
-export const nodesContent = (id, content) => (
-    {
-        type: NODES__CHANGE_CONTENT,
-        payload: {id, content}
-    }
-);
+export const nodesContent = (id, content) => ({
+        type: NODES__CHANGE_CONTENT, payload: {id, content}
+    });
 
-export const nodesOnConnect = (id, content) => (
-    {
-        type: NODES__ON_CONNECT,
-        payload: {id, content}
-    }
-);
+export const nodesOnConnect = (id, content) => ({
+        type: NODES__ON_CONNECT, payload: {id, content}
+    });
 
-export const graphAddEls = (els) => (
-    {
-        type: ADD_ELEMENTS,
-        payload: els,
-    }
-);
+export const graphAddEls = (els) => ({
+        type: ADD_ELEMENTS, payload: els,
+    });
 
-export const setDraggable = () => (
-    {
+export const setDraggable = () => ({
         type: SET_DRAG,
-    }
-);
+    });
 
-export const unsetDraggable = () => (
-    {
+export const unsetDraggable = () => ({
         type: UNSET_DRAG,
-    }
-);
+    });
 
-export const graphAddLink = (params) => (
-    {
-        type: ADD_LINK,
-        payload: params,
-    }
-);
+export const graphAddLink = (params) => ({
+        type: ADD_LINK, payload: params,
+    });
 
-export const graphRemoveLink = (id) => (
-    {
-        type: REMOVE_LINK,
-        payload: {
+export const graphRemoveLink = (id) => ({
+        type: REMOVE_LINK, payload: {
             id
         }
-    }
-);
+    });
 
-export const graphSetCurrent = (id) => (
-    {
-        type: NODES__SET_CURRENT,
-        payload: {
+export const graphSetCurrent = (id) => ({
+        type: NODES__SET_CURRENT, payload: {
             id
         }
-    }
-);
+    });
 
-export const graphUnsetCurrent = (id) => (
-    {
-        type: NODES__UNSET_CURRENT,
-        payload: {
+export const graphUnsetCurrent = (id) => ({
+        type: NODES__UNSET_CURRENT, payload: {
             id
         }
-    }
-);
+    });
 
-export const graphRemoveById = (id) => (
-    {
-        type: REMOVE_BY_ID,
-        payload: {
+export const graphRemoveById = (id) => ({
+        type: REMOVE_BY_ID, payload: {
             id
         },
-    }
-);
+    });
 
-export const graphAddEdge = (edge) => (
-    {
-        type: EDGES__ADD_EDGE,
-        payload: edge,
-    }
-)
+export const graphAddEdge = (edge) => ({
+        type: EDGES__ADD_EDGE, payload: edge,
+    })
 
-export const removeNodes = (nodes) => (
-    {
-        type: NODES__REMOVE_NODES,
-        payload: nodes,
-    }
-);
+export const removeNodes = (nodes) => ({
+        type: NODES__REMOVE_NODES, payload: nodes,
+    });
 
-export const removeEdges = (edges) => (
-    {
-        type: EDGES__REMOVE_EDGES,
-        payload: edges,
-    }
-);
+export const removeEdges = (edges) => ({
+        type: EDGES__REMOVE_EDGES, payload: edges,
+    });
 
+export const removeNode = (id) => ({
+        type: NODES__REMOVE_NODE, payload: {
+            id,
+        }
+    });
+
+export const removeEdgesFrom = (id) => ({
+    type: EDGES__REMOVE_FROM,
+    payload: {id}
+});
+
+export const removeEdgesTo = (id) => ({
+    type: EDGES__REMOVE_TO,
+    payload: {id}
+});

@@ -10,6 +10,7 @@ export const UNSET_CURR = "UNSET_CURR";
 
 export const NODES__ADD_NODES = "ADD_NODES";
 export const NODES__REMOVE_NODES = "REMOVE_NODES";
+export const NODES__REMOVE_NODE = "REMOVE_NODE";
 export const NODES__SET_CURRENT = "SET_CURRENT";
 export const NODES__UNSET_CURRENT = "UNSET_CURRENT";
 export const NODES__CHANGE_MEDIA = "CHANGE_MEDIA";
@@ -23,6 +24,8 @@ export const EDGES__ADD_EDGES = "ADD_EDGES";
 export const EDGES__ADD_EDGE = "ADD_EDGE";
 export const EDGES__REMOVE_EDGE = "REMOVE_EDGE";
 export const EDGES__REMOVE_EDGES = "REMOVE_EDGES";
+export const EDGES__REMOVE_FROM = "REMOVE_FROM";
+export const EDGES__REMOVE_TO = "REMOVE_TO";
 
 export const ADD_ELEMENTS = "ADD_ELEMENTS";
 export const REMOVE_ELEMENTS = "REMOVE_ELEMENTS";

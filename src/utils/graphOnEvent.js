@@ -5,7 +5,7 @@ import {
     currUnset,
     nodesLabel,
     nodesContent,
-    nodesOnConnect, setDraggable, graphSetCurrent, graphUnsetCurrent, graphAddEdge, removeEdges, removeNodes
+    nodesOnConnect, setDraggable, graphSetCurrent, graphUnsetCurrent, graphAddEdge, removeNodes
 } from "../store/actionCreators";
 
 export const onElementsRemove = (elementsToRemove, dispatch) => {
@@ -56,6 +56,4 @@ export const onElementEdit = (fields, node, currElem, dispatch) => {
 
     dispatch(currUnset());
     dispatch(graphUnsetCurrent(currElem.id));
-    document.getElementsByClassName('react-flow__pane')[0].click();
-    dispatch(setDraggable());
 }
