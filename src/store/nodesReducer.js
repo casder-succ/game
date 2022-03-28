@@ -4,7 +4,7 @@ import {
     NODES__ADD_NODES,
     NODES__UNSET_CURRENT,
     NODES__CHANGE_MEDIA,
-    NODES__SET_CURRENT
+    NODES__SET_CURRENT, NODES__NEW_NODE
 } from "./types";
 
 const initialState = {
@@ -56,7 +56,24 @@ const nodesReducer = (state = initialState, action) => {
                     return node;
                 }),
             };
-
+        case NODES__NEW_NODE:
+            let index = 0;
+            while (true) {
+                if (state.nodes.find(node => node.data.label === `sample${index ? index : ''}`))
+                    index += 1;
+                else
+                    break;
+            }
+            state.nodes.push({
+                ...action.payload,
+                data: {
+                    ...action.payload.data,
+                    label: `sample${index ? index : ''}`
+                }
+            });
+            return {
+                nodes: state.nodes,
+            };
         default:
             return state;
     }

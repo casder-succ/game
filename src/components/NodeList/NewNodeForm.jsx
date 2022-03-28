@@ -3,24 +3,23 @@ import {useDispatch} from "react-redux";
 import {NodeFlow} from '../../utils/nodes';
 
 import './main.sass';
-import {NODES__ADD_NODES} from "../../store/types";
+import {NODES__NEW_NODE} from "../../store/types";
 
 const NewNodeForm = ({els}) => {
     const dispatch = useDispatch();
 
     const onClick = () => {
         const position = els.reduce((prev, curr) => {
-            if (!curr.id.startsWith('e')) {
-                if (curr.position.x > prev.x) prev.x = curr.position.x;
-                if (curr.position.y > prev.y) prev.y = curr.position.y;
-            }
+            if (curr.position.x > prev.x) prev.x = curr.position.x;
+            if (curr.position.y > prev.y) prev.y = curr.position.y;
+
             return prev;
         }, {x: 0, y: 0})
         position.x += 150;
         position.y += 80;
         const node = new NodeFlow(position.x, position.y);
 
-        dispatch({type: NODES__ADD_NODES, payload: [{...node}]});
+        dispatch({type: NODES__NEW_NODE, payload: {...node}});
     }
 
     return (
