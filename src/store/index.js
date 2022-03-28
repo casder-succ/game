@@ -7,10 +7,10 @@ import nodesReducer from "./nodesReducer";
 
 const rootReducer = combineReducers({
     currElement: currElemReducer,
+    controls: controlsReducer,
     edges: edgesReducer,
     nodes: nodesReducer,
     editorFields: editorFieldsReducer,
-    controls: controlsReducer,
 })
 
 const store = createStore(rootReducer);

@@ -4,7 +4,7 @@ import {
     NODES__ADD_NODES,
     NODES__UNSET_CURRENT,
     NODES__CHANGE_MEDIA,
-    NODES__SET_CURRENT, NODES__NEW_NODE, NODES__CHANGE_CONTENT, NODES__CHANGE_LABEL
+    NODES__SET_CURRENT, NODES__NEW_NODE, NODES__CHANGE_CONTENT, NODES__CHANGE_LABEL, NODES__ON_CONNECT
 } from "./types";
 
 const initialState = {
@@ -32,7 +32,7 @@ const nodesReducer = (state = initialState, action) => {
                 nodes: [
                     ...state.nodes.map(node => {
                         node.data.isActive = node.id === action.payload.id;
-                        return node
+                        return node;
                     }),
                 ],
             };
@@ -91,6 +91,24 @@ const nodesReducer = (state = initialState, action) => {
             });
             return {
                 nodes: state.nodes,
+            };
+        case NODES__ON_CONNECT:
+            return {
+                ...state,
+                nodes: state.nodes.map((node) => {
+                    let content;
+                    state.nodes.forEach(el => {
+                        if (el.id === action.payload.content) {
+                            content = el.data.label || `id: ${el.id}`;
+                        }
+                    })
+
+                    if (node.id === action.payload.id) {
+                        node.data.links.push({id: action.payload.id, label: content});
+                        node.data.content += `[[${content}]]`;
+                    }
+                    return node;
+                })
             };
         default:
             return state;

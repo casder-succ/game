@@ -9,7 +9,7 @@ import {
     UNSET_CURR,
     REMOVE_ELEMENTS,
     NODES__CHANGE_MEDIA,
-    UPDATE_CONTENT,
+    NODES__ON_CONNECT,
     ADD_ELEMENTS,
     SET_DRAG,
     UNSET_DRAG,
@@ -105,9 +105,9 @@ export const nodesContent = (id, content) => (
     }
 );
 
-export const graphContentUpdate = (id, content) => (
+export const nodesOnConnect = (id, content) => (
     {
-        type: UPDATE_CONTENT,
+        type: NODES__ON_CONNECT,
         payload: {id, content}
     }
 );

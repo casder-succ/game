@@ -1,8 +1,8 @@
 let elements = {
     nodes: [
         {
-            id: '1',
-            type: 'input',
+            id: 'f1',
+            type: 'textNode',
             sourcePosition: 'right',
             targetPosition: 'left',
             data: {
@@ -19,7 +19,8 @@ let elements = {
             position: {x: 250, y: 420},
         },
         {
-            id: '2',
+            id: 'f2',
+            type: 'textNode',
             sourcePosition: 'right',
             targetPosition: 'left',
             data: {
@@ -36,7 +37,8 @@ let elements = {
             position: {x: 500, y: 420},
         },
         {
-            id: '3',
+            id: 'f3',
+            type: 'textNode',
             sourcePosition: 'right',
             targetPosition: 'left',
             data: {
@@ -53,8 +55,8 @@ let elements = {
         },
     ],
     edges: [
-        {id: 'e1-2', source: '1', target: '2',},
-        {id: 'e2-3', source: '2', target: '3',},
+        {id: 'ef1-f2', source: 'f1', target: 'f2',},
+        {id: 'ef2-f3', source: 'f2', target: 'f3',},
     ]
 };
 

@@ -69,18 +69,7 @@ const edgesReducer = (state = initialState, action) => {
         //             return node;
         //         })
         //     };
-        // case CHANGE_MEDIA:
 
-        // case CHANGE_CONTENT:
-        //     return {
-        //         ...state,
-        //         elements: state.elements.map((node) => {
-        //             if (node.id === action.payload.id) {
-        //                 node.data.content = action.payload.content;
-        //             }
-        //             return node;
-        //         })
-        //     };
         // case ADD_LINK:
         //     return {
         //         ...state,
@@ -108,23 +97,7 @@ const edgesReducer = (state = initialState, action) => {
         //         })
         //     };
         // case UPDATE_CONTENT:
-        //     return {
-        //         ...state,
-        //         elements: state.elements.map((node) => {
-        //             let content;
-        //             state.elements.forEach(el => {
-        //                 if (el.id === action.payload.content) {
-        //                     content = el.data.label || `id: ${el.id}`;
-        //                 }
-        //             })
-        //
-        //             if (node.id === action.payload.id) {
-        //                 node.data.links.push({id: action.payload.id, label: content});
-        //                 node.data.content += `[[${content}]]`;
-        //             }
-        //             return node;
-        //         })
-        //     };
+
         // case REMOVE_LINK:
         //     return {
         //         ...state,
