@@ -4,7 +4,7 @@ import {
     NODES__ADD_NODES,
     NODES__UNSET_CURRENT,
     NODES__CHANGE_MEDIA,
-    NODES__SET_CURRENT, NODES__NEW_NODE
+    NODES__SET_CURRENT, NODES__NEW_NODE, NODES__CHANGE_CONTENT, NODES__CHANGE_LABEL
 } from "./types";
 
 const initialState = {
@@ -52,6 +52,24 @@ const nodesReducer = (state = initialState, action) => {
                     if (node.id === action.payload.id) {
                         node.data.media.video = action.payload.video;
                         node.data.media.photo = action.payload.photo;
+                    }
+                    return node;
+                }),
+            };
+        case NODES__CHANGE_CONTENT:
+            return {
+                nodes: state.nodes.map((node) => {
+                    if (node.id === action.payload.id) {
+                        node.data.content = action.payload.content;
+                    }
+                    return node;
+                }),
+            };
+        case NODES__CHANGE_LABEL:
+            return {
+                nodes: state.nodes.map((node) => {
+                    if (node.id === action.payload.id) {
+                        node.data.label = action.payload.label;
                     }
                     return node;
                 }),

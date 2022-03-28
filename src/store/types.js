@@ -13,6 +13,8 @@ export const NODES__REMOVE_NODES = "REMOVE_NODES";
 export const NODES__SET_CURRENT = "SET_CURRENT";
 export const NODES__UNSET_CURRENT = "UNSET_CURRENT";
 export const NODES__CHANGE_MEDIA = "CHANGE_MEDIA";
+export const NODES__CHANGE_CONTENT = "CHANGE_CONTENT";
+export const NODES__CHANGE_LABEL = "CHANGE_LABEL";
 export const NODES__NEW_NODE = "NEW_NODE";
 
 export const EDGES__ADD_EDGES = "ADD_EDGES";

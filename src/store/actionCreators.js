@@ -21,7 +21,7 @@ import {
     EDGES__ADD_EDGE,
     EDGES__REMOVE_EDGES,
     NODES__REMOVE_NODES,
-    NODES__SET_CURRENT, NODES__UNSET_CURRENT
+    NODES__SET_CURRENT, NODES__UNSET_CURRENT, NODES__CHANGE_LABEL, NODES__CHANGE_CONTENT
 } from "./types";
 
 export const fieldsInit = (fields) => (
@@ -93,16 +93,16 @@ export const nodesMedia = (id, photo, video) => (
     }
 );
 
-export const graphLabel = (id, label) => (
+export const nodesLabel = (id, label) => (
     {
-        type: CHANGE_LABEL,
+        type: NODES__CHANGE_LABEL,
         payload: {id, label}
     }
 );
 
-export const graphContent = (id, content) => (
+export const nodesContent = (id, content) => (
     {
-        type: CHANGE_CONTENT,
+        type: NODES__CHANGE_CONTENT,
         payload: {id, content}
     }
 );
