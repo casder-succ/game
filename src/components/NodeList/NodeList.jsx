@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import "./main.sass";
 import NewNodeForm from "./NewNodeForm";
-import {currSet, graphSetCurrent} from "../../store/actionCreators";
+import {currSet, graphSetCurrent, unsetDraggable} from "../../store/actionCreators";
 
 const NodeList = () => {
     const dispatch = useDispatch();
@@ -11,11 +11,12 @@ const NodeList = () => {
 
     const onElementClick = (id) => {
         const [params] = nodes.filter((element) => element.id === id);
+        const [element] = Array.from(document.getElementsByClassName('react-flow__node')).filter((el) => el.getAttribute("data-id") === id);
+
+        dispatch(unsetDraggable());
         dispatch(currSet(params));
         dispatch(graphSetCurrent(params.id));
-
-        const [element] = Array.from(document.getElementsByClassName('react-flow__node')).filter((el) => el.getAttribute("data-id") === id);
-        element.click();
+        setTimeout(() => element.click(), 50)
     }
 
     return (
@@ -27,7 +28,9 @@ const NodeList = () => {
                     .map((element, i) => {
                         return (
                             <div key={i + 1} className={`node-list-item active-${element.data?.isActive || 'false'}`}
-                                 onClick={() => onElementClick(element.id)}>
+                                 onClick={() => {
+                                     onElementClick(element.id);
+                                 }}>
                                 {element.data.label}
                             </div>
                         );
