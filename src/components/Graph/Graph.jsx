@@ -8,18 +8,22 @@ import {onConnect, onElementClick, onElementEdit, onElementsRemove, onPaneClick}
 import 'react-flow-renderer/dist/style.css';
 import 'react-flow-renderer/dist/theme-default.css';
 import './main.sass'
+import CustomTextNode from "../Node/CustomTextNode";
 
 const Graph = () => {
     const dispatch = useDispatch();
     const elements = useSelector(state => ([...state.nodes.nodes, ...state.edges.edges]));
     const currElem = useSelector(state => state.currElement.currElem);
     const isDraggable = useSelector(state => state.controls.isDraggable);
+    const nodeTypes = {
+        textNode: CustomTextNode,
+    }
 
     return (
         <div className='graphField'>
             <ReactFlow
                 elements={elements}
-
+                nodeTypes={nodeTypes}
                 onElementsRemove={(elements) => onElementsRemove(elements, dispatch)}
                 onConnect={(edge) => onConnect(edge, dispatch)}
                 deleteKeyCode={46}
