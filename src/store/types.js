@@ -16,6 +16,8 @@ export const NODES__CHANGE_MEDIA = "CHANGE_MEDIA";
 export const NODES__CHANGE_CONTENT = "CHANGE_CONTENT";
 export const NODES__CHANGE_LABEL = "CHANGE_LABEL";
 export const NODES__NEW_NODE = "NEW_NODE";
+export const NODES__ON_CONNECT = "UPDATE_CONTENT";
+
 
 export const EDGES__ADD_EDGES = "ADD_EDGES";
 export const EDGES__ADD_EDGE = "ADD_EDGE";
@@ -27,7 +29,6 @@ export const REMOVE_ELEMENTS = "REMOVE_ELEMENTS";
 export const CHANGE_TITLE = "CHANGE_TITLE";
 export const ADD_LINK = "ADD_LINK";
 export const REMOVE_LINK = "REMOVE_LINK";
-export const UPDATE_CONTENT = "UPDATE_CONTENT";
 export const REMOVE_BY_ID = "REMOVE_BY_ID";
 
 export const SET_DRAG = "SET_DRAG";

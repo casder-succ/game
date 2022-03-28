@@ -5,12 +5,12 @@ import {
     currUnset,
     nodesLabel,
     nodesContent,
-    graphContentUpdate, setDraggable, graphSetCurrent, graphUnsetCurrent, graphAddEdge, removeEdges, removeNodes
+    nodesOnConnect, setDraggable, graphSetCurrent, graphUnsetCurrent, graphAddEdge, removeEdges, removeNodes
 } from "../store/actionCreators";
 
 export const onElementsRemove = (elementsToRemove, dispatch) => {
-    dispatch(removeEdges(elementsToRemove.filter(el => el.startsWith('e'))));
-    dispatch(removeNodes(elementsToRemove.filter(el => !el.startsWith('e'))));
+    // dispatch(removeEdges(elementsToRemove.filter(el => el.id.startsWith('e'))));
+    dispatch(removeNodes(elementsToRemove.filter(el => !el.id.startsWith('e'))));
 
     //todo: maybe update content too
 };
@@ -18,10 +18,13 @@ export const onElementsRemove = (elementsToRemove, dispatch) => {
 export const onConnect = (edge, dispatch) => {
     dispatch(graphAddEdge({...edge, id: 'e' + edge.source + '-' + edge.target}));
 
-    dispatch(graphContentUpdate(edge.source, edge.target)); //TODO: change reducer
+    dispatch(nodesOnConnect(edge.source, edge.target));
+    document.getElementsByClassName('react-flow__pane')[0].click();
+
 };
 
 export const onPaneClick = (dispatch) => {
+    dispatch(setDraggable());
     dispatch(currUnset());
     dispatch(graphUnsetCurrent());
 };
