@@ -28,8 +28,6 @@ export const CHANGE_TITLE = "CHANGE_TITLE";
 export const ADD_LINK = "ADD_LINK";
 export const REMOVE_LINK = "REMOVE_LINK";
 export const UPDATE_CONTENT = "UPDATE_CONTENT";
-export const SET_CURRENT_A = "SET_CURRENT_A";
-export const UNSET_CURRENT_A = "UNSET_CURRENT_A";
 export const REMOVE_BY_ID = "REMOVE_BY_ID";
 
 export const SET_DRAG = "SET_DRAG";
