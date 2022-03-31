@@ -18,6 +18,7 @@ export const NODES__CHANGE_CONTENT = "CHANGE_CONTENT";
 export const NODES__CHANGE_LABEL = "CHANGE_LABEL";
 export const NODES__NEW_NODE = "NEW_NODE";
 export const NODES__ON_CONNECT = "UPDATE_CONTENT";
+export const NODES__REMOVE_LINK_ON = "REMOVE_LINK_ON";
 
 
 export const EDGES__ADD_EDGES = "ADD_EDGES";

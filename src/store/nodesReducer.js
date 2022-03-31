@@ -9,30 +9,38 @@ import {
     NODES__CHANGE_CONTENT,
     NODES__CHANGE_LABEL,
     NODES__ON_CONNECT,
-    NODES__REMOVE_NODE
+    NODES__REMOVE_NODE, NODES__REMOVE_LINK_ON
 } from "./types";
 
 const initialState = {
     nodes: initialElements.nodes,
+    nodesNames: initialElements.nodes.map(node => node.data.label),
 };
 
 const nodesReducer = (state = initialState, action) => {
     switch (action.type) {
         case NODES__ADD_NODES:
+            state.nodesNames.push(action.payload.map(node => node.data.label));
             return {
                 nodes: [
                     ...state.nodes,
                     ...action.payload,
                 ],
+                nodesNames: state.nodesNames
+
             };
         case NODES__REMOVE_NODES:
             const idList = action.payload.map(node => node.id);
+            const namesList = action.payload.map(node => node.data.label);
             return {
                 nodes: state.nodes.filter(node => !idList.find(id => id === node.id)),
+                nodesNames: state.nodesNames.filter((nodeName) => !namesList.find(name => name === nodeName)),
             };
         case NODES__REMOVE_NODE:
+            const [nodeName] = state.nodes.filter(node => node.id !== action.payload.id).map(node => node.data.label);
             return {
                 nodes: state.nodes.filter(node => node.id !== action.payload.id),
+                nodesNames: state.nodesNames.filter((name) => name !== nodeName),
             };
         case NODES__SET_CURRENT:
             return {
@@ -116,6 +124,10 @@ const nodesReducer = (state = initialState, action) => {
                     }
                     return node;
                 })
+            };
+        case NODES__REMOVE_LINK_ON:
+            return {
+                ...state.nodes.map
             };
         default:
             return state;

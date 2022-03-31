@@ -5,7 +5,7 @@ import {
     fieldsPhoto,
     fieldsVideo,
     fieldsContent,
-    fieldsUnset, unsetDraggable, currUnset, graphRemoveLink, removeNode, removeEdgesTo, removeEdgesFrom
+    fieldsUnset, unsetDraggable, currUnset, graphRemoveLink, removeNode, removeEdgesTo, removeEdgesFrom, removeLinkOn
 } from "../../store/actionCreators";
 
 import './main.sass'
@@ -81,6 +81,7 @@ const NodeEditor = ({node, onSubmit}) => {
                                 dispatch(graphRemoveLink(node.id));
                                 dispatch(removeEdgesTo(node.id));
                                 dispatch(removeEdgesFrom(node.id));
+                                dispatch(removeLinkOn(node.id));
                             }}
                         >
                             Delete node
