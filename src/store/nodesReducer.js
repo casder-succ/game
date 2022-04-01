@@ -76,21 +76,30 @@ const nodesReducer = (state = initialState, action) => {
                     if (node.id === action.payload.id) {
                         node.data.label = action.payload.label;
                     }
+                    node.data.links.forEach(link => {
+                        if (link.id === action.payload.id) {
+                            node.data.content = node.data.content.replace(link.label, action.payload.label);
+                            link.label = link.label.replace(link.label, action.payload.label);
+                        }
+                    })
                     return node;
                 }),
             };
         case NODES__NEW_NODE:
             let index = 0;
-            while (true) {
-                if (state.nodes.find(node => node.data.label === `sample${index ? index : ''}`)) index += 1; else break;
+            while (state.nodes.find(node => node.data.label === `sample${index ? index : ''}`)) {
+                index += 1;
             }
-            state.nodes.push({
-                ...action.payload, data: {
-                    ...action.payload.data, label: `sample${index ? index : ''}`
-                }
-            });
             return {
-                nodes: state.nodes,
+                nodes: [
+                    ...state.nodes,
+                    {
+                        ...action.payload,
+                        data: {
+                            ...action.payload.data, label: `sample${index ? index : ''}`
+                        }
+                    }
+                ],
             };
         case NODES__ON_CONNECT:
             return {
