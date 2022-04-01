@@ -25,12 +25,16 @@ export const parseElementContent = (oldId, content, node, x, y) => {
         matches.push(match[0].replace('[[', '').replace(']]', ''));
     }
 
-    const removedLinks = node.data.links.filter(link => !matches.includes(link.label));
-    removedLinks.forEach(link => {
-        actions.push(removePhLink(link.id, node.id), removeEdgesTo(link.id));
+    // const removedLinks = node.data.links.filter(link => !matches.includes(link.label));
+    // removedLinks.forEach(link => {
+    //     actions.push(removePhLink(link.id, node.id), removeEdgesTo(link.id));
+    // })
+
+    const newLinks = matches.filter(match => !node.data.links.find(link => link.label === match));
+    newLinks.forEach(link => {
+        actions.push();
     })
-
-
+    console.log(newLinks)
 
 
 
