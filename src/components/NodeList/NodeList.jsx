@@ -18,21 +18,23 @@ const NodeList = () => {
     return (
         <div className="node-list">
             <h2 className="node-list-title">Nodes:</h2>
-            <div className="node-list-items">
+            <div className="node-list__container">
+                <div className="node-list-items">
 
-                {nodes
-                    .map((element, i) => {
-                        return (
-                            <div key={i + 1} className={`node-list-item active-${element.data?.isActive || 'false'}`}
-                                 onClick={() => {
-                                     onElementClick(element.id);
-                                 }}>
-                                {element.data.label}
-                            </div>
-                        );
-                    })}
+                    {nodes
+                        .map((element, i) => {
+                            return (
+                                <div key={i + 1} className={`node-list-item active-${element.data?.isActive || 'false'}`}
+                                     onClick={() => {
+                                         onElementClick(element.id);
+                                     }}>
+                                    {element.data.label}
+                                </div>
+                            );
+                        })}
+                </div>
+                <NewNodeForm els={nodes}/>
             </div>
-            <NewNodeForm els={nodes}/>
         </div>
     );
 };

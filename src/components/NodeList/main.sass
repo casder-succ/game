@@ -6,6 +6,8 @@
   width: 200px
   background: #5b999b
   z-index: 999
+  overflow: visible
+
 
   &-title
     font-size: 20px
@@ -15,6 +17,10 @@
 
   &-items
     margin: 20px
+    max-height: 80%
+    flex-grow: 1
+    overflow-y: auto
+    overflow-x: visible
 
   &-item
     border: 5px solid transparent
@@ -26,14 +32,19 @@
     cursor: pointer
     transition: border-color .5s, transform .5s
 
+  &__container
+    display: flex
+    flex-direction: column
+    height: 90%
+    overflow: visible
+
   .active-true
-    transform: translateX(-50px)
     border-color: #8bcfd2
 
 .create-form
   width: 80%
   height: 40px
-  margin: 150px auto 0
+  margin: 20px auto 0
 
   button
     display: block
