@@ -5,15 +5,10 @@ import {
     currUnset,
     nodesLabel,
     nodesContent,
-    nodesOnConnect, setDraggable, graphSetCurrent, graphUnsetCurrent, graphAddEdge, removeNodes
+    nodesOnConnect, setDraggable, graphSetCurrent, graphUnsetCurrent, graphAddEdge
 } from "../store/actionCreators";
 
-export const onElementsRemove = (elementsToRemove, dispatch) => {
-    // dispatch(removeEdges(elementsToRemove.filter(el => el.id.startsWith('e'))));
-    dispatch(removeNodes(elementsToRemove.filter(el => !el.id.startsWith('e'))));
 
-    //todo: maybe update content too
-};
 
 export const onConnect = (edge, dispatch) => {
     dispatch(graphAddEdge({...edge, id: 'e' + edge.source + '-' + edge.target}));

@@ -62,10 +62,6 @@ export const currUnset = () => ({
     type: UNSET_CURR,
 });
 
-export const graphRemove = (elements) => ({
-    type: REMOVE_ELEMENTS, payload: elements,
-});
-
 export const nodesMedia = (id, photo, video) => ({
     type: NODES__CHANGE_MEDIA, payload: {id, photo, video}
 });
@@ -78,8 +74,8 @@ export const nodesContent = (id, content) => ({
     type: NODES__CHANGE_CONTENT, payload: {id, content}
 });
 
-export const nodesOnConnect = (id, content) => ({
-    type: NODES__ON_CONNECT, payload: {id, content}
+export const nodesOnConnect = (source, target) => ({
+    type: NODES__ON_CONNECT, payload: {source, target}
 });
 
 export const graphAddEls = (els) => ({
@@ -125,10 +121,6 @@ export const graphRemoveById = (id) => ({
 export const graphAddEdge = (edge) => ({
     type: EDGES__ADD_EDGE, payload: edge,
 })
-
-export const removeNodes = (nodes) => ({
-    type: NODES__REMOVE_NODES, payload: nodes,
-});
 
 export const removeEdges = (edges) => ({
     type: EDGES__REMOVE_EDGES, payload: edges,
