@@ -10,7 +10,7 @@ import {
     NODES__CHANGE_LABEL,
     NODES__ON_CONNECT,
     NODES__REMOVE_NODE,
-    NODES__REMOVE_LINK_ON
+    NODES__REMOVE_LINK_ON, NODES__REMOVE_PH_LINK_ON
 } from "./types";
 
 const initialState = {
@@ -138,10 +138,24 @@ const nodesReducer = (state = initialState, action) => {
                         node.data.content.splice(node.data.content.join('').indexOf(`[[${name}]]`), `[[${name}]]`.length);
                         node.data.content = node.data.content.join('');
                     }
-
                     return node;
                 })
             };
+        case NODES__REMOVE_PH_LINK_ON:
+            return {
+                nodes: state.nodes.map(node => {
+                    if (node.id === action.payload.sourceId) {
+                        let indexOf = -1;
+                        node.data.links.forEach((link, index) => {
+                            if (indexOf === -1 && link.id === action.payload.id) {
+                                indexOf = index;
+                            }
+                        });
+                        node.data.links.splice(indexOf, 1);
+                    }
+                    return node
+                })
+            }
         default:
             return state;
     }
