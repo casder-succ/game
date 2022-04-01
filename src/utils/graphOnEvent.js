@@ -5,7 +5,7 @@ import {
     currUnset,
     nodesLabel,
     nodesContent,
-    nodesOnConnect, setDraggable, graphSetCurrent, graphUnsetCurrent, graphAddEdge
+    nodesOnConnect, graphSetCurrent, graphUnsetCurrent, graphAddEdge
 } from "../store/actionCreators";
 
 
@@ -19,7 +19,6 @@ export const onConnect = (edge, dispatch) => {
 };
 
 export const onPaneClick = (dispatch) => {
-    dispatch(setDraggable());
     dispatch(currUnset());
     dispatch(graphUnsetCurrent());
 };

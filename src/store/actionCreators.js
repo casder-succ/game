@@ -10,8 +10,6 @@ import {
     NODES__CHANGE_MEDIA,
     NODES__ON_CONNECT,
     ADD_ELEMENTS,
-    SET_DRAG,
-    UNSET_DRAG,
     ADD_LINK,
     REMOVE_LINK,
     REMOVE_BY_ID,
@@ -78,14 +76,6 @@ export const nodesOnConnect = (source, target) => ({
 
 export const graphAddEls = (els) => ({
     type: ADD_ELEMENTS, payload: els,
-});
-
-export const setDraggable = () => ({
-    type: SET_DRAG,
-});
-
-export const unsetDraggable = () => ({
-    type: UNSET_DRAG,
 });
 
 export const graphAddLink = (params) => ({
