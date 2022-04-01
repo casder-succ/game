@@ -14,7 +14,6 @@ const Graph = () => {
     const dispatch = useDispatch();
     const elements = useSelector(state => ([...state.nodes.nodes, ...state.edges.edges]));
     const currElem = useSelector(state => state.currElement.currElem);
-    const isDraggable = useSelector(state => state.controls.isDraggable);
     const nodeTypes = {
         textNode: CustomTextNode,
     }
@@ -27,7 +26,6 @@ const Graph = () => {
                 onConnect={(edge) => onConnect(edge, dispatch)}
                 deleteKeyCode={46}
 
-                nodesDraggable={isDraggable}
                 onElementClick={(event, element) => onElementClick(event, element, dispatch)}
                 onPaneClick={() => onPaneClick(dispatch)}
             >
