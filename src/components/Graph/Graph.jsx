@@ -19,8 +19,6 @@ const Graph = () => {
         textNode: CustomTextNode,
     }
 
-    console.log(elements)
-
     return (
         <div className='graphField'>
             <ReactFlow

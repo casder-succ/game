@@ -87,6 +87,7 @@ const nodesReducer = (state = initialState, action) => {
             };
         case NODES__NEW_NODE:
             let index = 0;
+            // eslint-disable-next-line no-loop-func
             while (state.nodes.find(node => node.data.label === `sample${index ? index : ''}`)) {
                 index += 1;
             }

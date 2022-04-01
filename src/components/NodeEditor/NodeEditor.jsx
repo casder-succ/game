@@ -5,7 +5,7 @@ import {
     fieldsPhoto,
     fieldsVideo,
     fieldsContent,
-    fieldsUnset, unsetDraggable, currUnset, graphRemoveLink, removeNode, removeEdgesTo, removeEdgesFrom, removeLinkOn
+    fieldsUnset, currUnset, graphRemoveLink, removeNode, removeEdgesTo, removeEdgesFrom, removeLinkOn
 } from "../../store/actionCreators";
 
 import './main.sass'

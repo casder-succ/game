@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import "./main.sass";
 import NewNodeForm from "./NewNodeForm";
-import {currSet, graphSetCurrent, unsetDraggable} from "../../store/actionCreators";
+import {currSet, graphSetCurrent} from "../../store/actionCreators";
 
 const NodeList = () => {
     const dispatch = useDispatch();
