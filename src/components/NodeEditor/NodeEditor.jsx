@@ -77,11 +77,11 @@ const NodeEditor = ({node, onSubmit}) => {
                         <button className="editor_button"
                             onClick={() => {
                                 dispatch(currUnset());
+                                dispatch(removeLinkOn(node.id));
                                 dispatch(removeNode(node.id));
                                 dispatch(graphRemoveLink(node.id));
                                 dispatch(removeEdgesTo(node.id));
                                 dispatch(removeEdgesFrom(node.id));
-                                dispatch(removeLinkOn(node.id));
                             }}
                         >
                             Delete node
