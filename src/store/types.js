@@ -20,7 +20,8 @@ export const NODES__NEW_NODE = "NEW_NODE";
 export const NODES__ON_CONNECT = "UPDATE_CONTENT";
 export const NODES__REMOVE_LINK_ON = "REMOVE_LINK_ON";
 export const NODES__REMOVE_PH_LINK_ON = "REMOVE_PH_LINK_ON";
-export const NODES__ADD_LINK = "ADD_LINK";
+export const NODES__ADD_LINK = "ADD_LINK_N";
+export const NODES__ADD_NODE = "ADD_NODE_N";
 
 
 export const EDGES__ADD_EDGES = "ADD_EDGES";
@@ -29,6 +30,7 @@ export const EDGES__REMOVE_EDGE = "REMOVE_EDGE";
 export const EDGES__REMOVE_EDGES = "REMOVE_EDGES";
 export const EDGES__REMOVE_FROM = "REMOVE_FROM";
 export const EDGES__REMOVE_TO = "REMOVE_TO";
+export const EDGES__REMOVE_LINK = "REMOVE_LINK_E";
 
 export const ADD_ELEMENTS = "ADD_ELEMENTS";
 export const REMOVE_ELEMENTS = "REMOVE_ELEMENTS";

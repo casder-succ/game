@@ -23,7 +23,7 @@ import {
     EDGES__REMOVE_FROM,
     EDGES__REMOVE_TO,
     NODES__REMOVE_LINK_ON,
-    NODES__REMOVE_PH_LINK_ON, NODES__ADD_LINK,
+    NODES__REMOVE_PH_LINK_ON, NODES__NEW_NODE, NODES__ADD_LINK, NODES__ADD_NODE, EDGES__REMOVE_LINK,
 } from "./types";
 
 export const fieldsInit = (fields) => ({
@@ -135,6 +135,18 @@ export const removePhLink = (id, sourceId) => ({
     type: NODES__REMOVE_PH_LINK_ON, payload: {id, sourceId}
 })
 
-export const addLink = (label, sourceId) => ({
-    type: NODES__ADD_LINK, payload: {label, sourceId},
+export const newNode = (node) => ({
+    type: NODES__NEW_NODE, payload: node,
+})
+
+export const addLink = (source, label, id) => ({
+    type: NODES__ADD_LINK, payload: {source, label, id},
+})
+
+export const addNode = (node) => ({
+    type: NODES__ADD_NODE, payload: node,
+})
+
+export const removeEdgeLink = (targetId, sourceId) => ({
+    type: EDGES__REMOVE_LINK, payload: {targetId, sourceId},
 })
