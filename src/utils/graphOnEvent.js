@@ -41,7 +41,7 @@ export const onElementEdit = (fields, node, currElem, dispatch) => {
         dispatch(nodesLabel(currElem.id, fields.label));
     }
 
-    if (fields.content && fields.content !== currElem.data.content) {
+    if (fields.content !== currElem.data.content) {
         dispatch(nodesContent(currElem.id, fields.content));
 
         parseElementContent(currElem.id, fields.content, node, currElem.position.x, currElem.position.y)
