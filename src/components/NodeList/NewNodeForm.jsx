@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {NodeFlow} from '../../utils/nodes';
 
 import './main.sass';
-import {NODES__NEW_NODE} from "../../store/types";
+import {newNode} from "../../store/actionCreators";
 
 const NewNodeForm = ({els}) => {
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const NewNodeForm = ({els}) => {
         position.y += 80;
         const node = new NodeFlow(position.x, position.y);
 
-        dispatch({type: NODES__NEW_NODE, payload: {...node}});
+        dispatch(newNode(node));
     }
 
     return (
