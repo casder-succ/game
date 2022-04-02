@@ -10,7 +10,7 @@ import {
     NODES__CHANGE_LABEL,
     NODES__ON_CONNECT,
     NODES__REMOVE_NODE,
-    NODES__REMOVE_LINK_ON, NODES__REMOVE_PH_LINK_ON
+    NODES__REMOVE_LINK_ON, NODES__REMOVE_PH_LINK_ON, NODES__ADD_LINK, NODES__ADD_NODE
 } from "./types";
 
 const initialState = {
@@ -88,7 +88,7 @@ const nodesReducer = (state = initialState, action) => {
         case NODES__NEW_NODE:
             let index = 0;
             // eslint-disable-next-line no-loop-func
-            while (state.nodes.find(node => node.data.label === `sample${index ? index : ''}`)) {
+            while (state.nodes.find(node => node.data.label === `sample${index ? ' ' + index : ''}`)) {
                 index += 1;
             }
             return {
@@ -97,7 +97,7 @@ const nodesReducer = (state = initialState, action) => {
                     {
                         ...action.payload,
                         data: {
-                            ...action.payload.data, label: `sample${index ? index : ''}`
+                            ...action.payload.data, label: `sample${index ? ' ' + index : ''}`
                         }
                     }
                 ],
@@ -155,7 +155,26 @@ const nodesReducer = (state = initialState, action) => {
                     }
                     return node
                 })
-            }
+            };
+        case NODES__ADD_LINK:
+            return {
+                nodes: state.nodes.map(node => {
+                    if (node.id === action.payload.source) {
+                        node.data.links.push({
+                            label: action.payload.label,
+                            id: action.payload.id,
+                        });
+                    }
+                    return node;
+                })
+            };
+        case NODES__ADD_NODE:
+            return {
+                nodes: [
+                    ...state.nodes,
+                    action.payload
+                ]
+            };
         default:
             return state;
     }
