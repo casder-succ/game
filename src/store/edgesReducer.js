@@ -4,7 +4,7 @@ import {
     EDGES__ADD_EDGES,
     EDGES__REMOVE_EDGE,
     EDGES__REMOVE_EDGES,
-    EDGES__REMOVE_FROM,
+    EDGES__REMOVE_FROM, EDGES__REMOVE_LINK,
     EDGES__REMOVE_TO,
 } from "./types";
 
@@ -51,6 +51,10 @@ const edgesReducer = (state = initialState, action) => {
                 edges: state.edges.filter(edge => !edge.id.endsWith(`${action.payload.id}`)),
             };
 
+        case EDGES__REMOVE_LINK:
+            return {
+                edges: state.edges.filter(edge => !(edge.target === action.payload.targetId && edge.source === action.payload.sourceId))
+            };
         // case REMOVE_ELEMENTS:
         //     const ids = action.payload.map((el) => el.id);
         //     return {
