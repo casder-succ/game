@@ -1,11 +1,7 @@
 import {NodeFlow} from "./nodes";
 import {
-    edRemovePhLink,
-    graphAddEls,
-    graphAddLink,
-    graphRemoveById,
-    removeEdgesTo,
-    removeLinkOn, removePhLink
+    addLink, addNode, graphAddEdge, removeEdgeLink,
+    removeEdgesTo, removePhLink
 } from "../store/actionCreators";
 
 const REG_FOR_NODES = /\[[[\sA-Za-z]+]]/gm;
@@ -22,67 +18,36 @@ export const parseElementContent = (oldId, content, node, x, y) => {
         match = REG_FOR_NODES.exec(content)
         if (!match) break;
         if (!firstMatch) firstMatch = match.index;
-        matches.push(match[0].replace('[[', '').replace(']]', ''));
+        console.log(match)
+        if (match[0] !== "[[]]") {
+            matches.push(match[0].replace('[[', '').replace(']]', ''));
+        }
     }
 
-    // const removedLinks = node.data.links.filter(link => !matches.includes(link.label));
-    // removedLinks.forEach(link => {
-    //     actions.push(removePhLink(link.id, node.id), removeEdgesTo(link.id));
-    // })
+    const removedLinks = node.data.links.filter(link => !matches.includes(link.label));
+    removedLinks.forEach(link => {
+        actions.push(
+            removePhLink(link.id, node.id),
+            removeEdgeLink(link.id, node.id));
+    })
 
     const newLinks = matches.filter(match => !node.data.links.find(link => link.label === match));
-    newLinks.forEach(link => {
-        actions.push();
+    newLinks.forEach((link, i) => {
+        console.log(link)
+        const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
+        const label = link;
+
+        const x_r = x + x_y[node.data.links.length ? node.data.links.length : i].x;
+        const y_r = y + x_y[node.data.links.length ? node.data.links.length : i].y;
+
+        const nodeToAdd = new NodeFlow(x_r, y_r, label, id);
+        const newEdge = {
+            id: `e${oldId}-${id}`, source: `${oldId}`, target: `${id}`
+        };
+
+
+        actions.push(graphAddEdge(newEdge), addNode(nodeToAdd), addLink(oldId, label, id),);
     })
-    console.log(newLinks)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const linkNames = node.data.links.map(el => el.label);
-    //
-    //
-    //
-    // node.data.links
-    //     .filter((link) => !matches.find((match) => match === link.label))
-    //     .forEach((elToRemove) => {
-    //         actions.push(graphRemoveById(elToRemove.id));
-    //     });
-    //
-    // [...new Set(matches)]
-    //     .filter(el => !linkNames.find(link => link === el))
-    //     .forEach((el, i) => {
-    //         console.log(el)
-    //         const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
-    //         const label = el.slice(2, -2) || 'sample';
-    //
-    //         const x_r = x + x_y[node.data.links.length ? node.data.links.length + i - 1 : i].x;
-    //         const y_r = y + x_y[node.data.links.length ? node.data.links.length + i - 1 : i].y;
-    //
-    //         const params1 = new NodeFlow(x_r, y_r, label, id);
-    //         const params2 = {
-    //             id: `e${oldId}-${id}`,
-    //             source: `${oldId}`,
-    //             target: `${id}`
-    //         };
-    //
-    //         actions.push(
-    //             graphAddLink({id: oldId, link: id}),
-    //             graphAddEls([params1, params2])
-    //         );
-    //
-    //     });
     return actions;
 }
