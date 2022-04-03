@@ -219,13 +219,18 @@ const elementsReducer = (state = initialState, action) => {
                 })
             };
         case NODES__ADD_LINK:
+            const nodeNamesL = state.nodes.map(node => node.data.label);
             return {
                 edges: state.edges,
                 nodes: state.nodes.map(node => {
                     if (node.id === action.payload.source) {
+                        let id = "";
+                        if (nodeNamesL.includes(action.payload.label)) {
+                            [id] = state.nodes.filter(node => node.data.label === action.payload.label).map(node => node.id)
+                        }
                         node.data.links.push({
                             label: action.payload.label,
-                            id: action.payload.id,
+                            id: id || action.payload.id,
                         });
                     }
                     return node;
@@ -239,18 +244,17 @@ const elementsReducer = (state = initialState, action) => {
             } else {
                 state.edges.push({
                     ...action.payload.edge,
-                    id: state.nodes.filter(node => node.data.label === action.payload.node.label).map(node => node.data.label)[0]
+                    id: action.payload.edge.id.replace(action.payload.node.id, state.nodes.filter(node => node.data.label === action.payload.node.label).map(node => node.data.label)[0]),
+                    target: state.nodes.filter(node => node.data.label === action.payload.node.data.label).map(node => node.id)[0]
                 })
             }
             return {
                 edges: state.edges,
-                nodes: [
-                    ...state.nodes
-                ]
+                nodes: [...state.nodes]
             };
         default:
             return state;
     }
 }
 
-export default elementsReducer; 
+export default elementsReducer;
