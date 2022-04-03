@@ -13,11 +13,8 @@ export const parseElementContent = (oldId, content, node, x, y) => {
     let match;
     let firstMatch;
 
-    console.log(content)
-
     while (true) {
         match = REG_FOR_NODES.exec(content)
-        console.log(match)
         if (!match) break;
         if (!firstMatch) firstMatch = match.index;
         if (match[0] !== "[[]]") {
@@ -33,7 +30,6 @@ export const parseElementContent = (oldId, content, node, x, y) => {
     })
 
     const newLinks = matches.filter(match => !node.data.links.find(link => link.label === match));
-    console.log(newLinks, matches)
     newLinks.forEach((link, i) => {
         const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
         const label = link;
