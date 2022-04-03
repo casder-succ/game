@@ -82,6 +82,7 @@ const NodeEditor = ({node, onSubmit}) => {
                                 dispatch(graphRemoveLink(node.id));
                                 dispatch(removeEdgesTo(node.id));
                                 dispatch(removeEdgesFrom(node.id));
+                                dispatch(fieldsUnset());
                             }}
                         >
                             Delete node
