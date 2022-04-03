@@ -10,7 +10,7 @@ let elements = {
                 content: 'Hello! This is the first node. [[Emma sends letter]]',
                 links: [{id: 'f2', label: 'Emma sends letter', position: "end"}],
                 media: {
-                    photo: '',
+                    photo: 'https://book-horror.ru/wp-content/uploads/2019/06/doll-626790_1920.jpg',
                     video: '',
                 },
                 isActive: false,
