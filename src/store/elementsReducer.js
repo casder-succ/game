@@ -16,92 +16,74 @@ import {
     NODES__ADD_NODE,
     EDGES__ADD_EDGES,
     EDGES__ADD_EDGE,
-    EDGES__REMOVE_EDGE, EDGES__REMOVE_EDGES, EDGES__REMOVE_FROM, EDGES__REMOVE_TO, EDGES__REMOVE_LINK
+    EDGES__REMOVE_EDGE,
+    EDGES__REMOVE_EDGES,
+    EDGES__REMOVE_FROM,
+    EDGES__REMOVE_TO,
+    EDGES__REMOVE_LINK
 } from "./types";
 
 const initialState = {
-    nodes: initialElements.nodes,
-    edges: initialElements.edges,
+    nodes: initialElements.nodes, edges: initialElements.edges,
 };
 
 const elementsReducer = (state = initialState, action) => {
     switch (action.type) {
         case EDGES__ADD_EDGES:
             return {
-                nodes: state.nodes,
-                edges: [
-                    ...state.edges,
-                    ...action.payload,
-                ],
+                ...state, edges: [...state.edges, ...action.payload,],
             };
         case EDGES__ADD_EDGE:
             return {
-                nodes: state.nodes,
-                edges: [
-                    ...state.edges,
-                    action.payload
-                ]
+                ...state, edges: [...state.edges, action.payload]
             }
         case EDGES__REMOVE_EDGE:
             return {
-                nodes: state.nodes,
-                edges: [
-                    ...state.edges.filter(edge => edge.id !== action.payload.id),
-                ],
+                ...state, edges: [...state.edges.filter(edge => edge.id !== action.payload.id),],
             };
 
         case EDGES__REMOVE_EDGES:
             const idList1 = action.payload.map(el => el.id);
             return {
-                nodes: state.nodes,
-                edges: [
-                    ...state.edges.filter(edge => !idList1.find(id => id === edge.id)),
-                ],
+                ...state, edges: [...state.edges.filter(edge => !idList1.find(id => id === edge.id)),],
             };
         case EDGES__REMOVE_FROM:
             return {
-                nodes: state.nodes,
-                edges: state.edges.filter(edge => !edge.id.startsWith(`e${action.payload.id}`)),
+                ...state, edges: state.edges.filter(edge => !edge.id.startsWith(`e${action.payload.id}`)),
             };
         case EDGES__REMOVE_TO:
             return {
-                nodes: state.nodes,
-                edges: state.edges.filter(edge => !edge.id.endsWith(`${action.payload.id}`)),
+                ...state, edges: state.edges.filter(edge => !edge.id.endsWith(`${action.payload.id}`)),
             };
 
         case EDGES__REMOVE_LINK:
             return {
-                nodes: state.nodes,
+                ...state,
                 edges: state.edges.filter(edge => !(edge.target === action.payload.targetId && edge.source === action.payload.sourceId))
             };
         case NODES__ADD_NODES:
             return {
-                nodes: [...state.nodes, ...action.payload,],
-                edges: state.edges,
+                nodes: [...state.nodes, ...action.payload,], ...state,
             };
         case NODES__REMOVE_NODES:
             const idList = action.payload.map(node => node.id);
             return {
-                edges: state.edges,
-                nodes: state.nodes.filter(node => !idList.find(id => id === node.id)),
+                ...state, nodes: state.nodes.filter(node => !idList.find(id => id === node.id)),
             };
         case NODES__REMOVE_NODE:
             return {
-                edges: state.edges,
-                nodes: state.nodes.filter(node => node.id !== action.payload.id),
+                ...state, nodes: state.nodes.filter(node => node.id !== action.payload.id),
             };
         case NODES__SET_CURRENT:
             return {
-                edges: state.edges,
-                nodes: [...state.nodes.map(node => {
+                ...state, nodes: [...state.nodes.map(node => {
                     node.data.isActive = node.id === action.payload.id;
                     return node;
                 }),],
             };
         case NODES__UNSET_CURRENT:
             return {
-                edges: state.edges,
-                nodes: [...state.nodes.map(node => {
+                ...state, nodes: [...state.nodes.map(node => {
                     node.data.isActive = false;
 
                     return node
@@ -109,8 +91,7 @@ const elementsReducer = (state = initialState, action) => {
             };
         case NODES__CHANGE_MEDIA:
             return {
-                edges: state.edges,
-                nodes: state.nodes.map((node) => {
+                ...state, nodes: state.nodes.map((node) => {
                     if (node.id === action.payload.id) {
                         node.data.media.video = action.payload.video;
                         node.data.media.photo = action.payload.photo;
@@ -120,8 +101,7 @@ const elementsReducer = (state = initialState, action) => {
             };
         case NODES__CHANGE_CONTENT:
             return {
-                edges: state.edges,
-                nodes: state.nodes.map((node) => {
+                ...state, nodes: state.nodes.map((node) => {
                     if (node.id === action.payload.id) {
                         node.data.content = action.payload.content;
                     }
@@ -130,8 +110,7 @@ const elementsReducer = (state = initialState, action) => {
             };
         case NODES__CHANGE_LABEL:
             return {
-                edges: state.edges,
-                nodes: state.nodes.map((node) => {
+                ...state, nodes: state.nodes.map((node) => {
                     if (node.id === action.payload.id) {
                         node.data.label = action.payload.label;
                     }
@@ -150,22 +129,25 @@ const elementsReducer = (state = initialState, action) => {
             while (state.nodes.find(node => node.data.label === `sample${index ? ' ' + index : ''}`)) {
                 index += 1;
             }
-            return {
-                edges: state.edges,
-                nodes: [
-                    ...state.nodes,
-                    {
-                        ...action.payload,
-                        data: {
-                            ...action.payload.data, label: `sample${index ? ' ' + index : ''}`
-                        }
+            return state.nodes.length ? {
+                ...state, nodes: [...state.nodes, {
+                    ...action.payload, data: {
+                        ...action.payload.data, label: `sample${index ? ' ' + index : ''}`
                     }
-                ],
+                }],
+            } : {
+                ...state, nodes: [{
+                    ...action.payload,
+                    id: 'f1',
+                    data: {
+                        ...action.payload.data,
+                        label: `sample${index ? ' ' + index : ''}`
+                    }
+                }]
             };
         case NODES__ON_CONNECT:
             return {
-                ...state,
-                nodes: state.nodes.map((node) => {
+                ...state, nodes: state.nodes.map((node) => {
                     console.log(node)
                     let content;
                     state.nodes.forEach(el => {
@@ -183,8 +165,7 @@ const elementsReducer = (state = initialState, action) => {
             };
         case NODES__REMOVE_LINK_ON:
             return {
-                edges: state.edges,
-                nodes: state.nodes.map(node => {
+                ...state, nodes: state.nodes.map(node => {
                     let indexOf = -1;
                     let name = '';
                     node.data.links.forEach((link, index) => {
@@ -204,8 +185,7 @@ const elementsReducer = (state = initialState, action) => {
             };
         case NODES__REMOVE_PH_LINK_ON:
             return {
-                edges: state.edges,
-                nodes: state.nodes.map(node => {
+                ...state, nodes: state.nodes.map(node => {
                     if (node.id === action.payload.sourceId) {
                         let indexOf = -1;
                         node.data.links.forEach((link, index) => {
@@ -221,7 +201,7 @@ const elementsReducer = (state = initialState, action) => {
         case NODES__ADD_LINK:
             const nodeNamesL = state.nodes.map(node => node.data.label);
             return {
-                edges: state.edges,
+                ...state,
                 nodes: state.nodes.map(node => {
                     if (node.id === action.payload.source) {
                         let id = "";
@@ -229,8 +209,7 @@ const elementsReducer = (state = initialState, action) => {
                             [id] = state.nodes.filter(node => node.data.label === action.payload.label).map(node => node.id)
                         }
                         node.data.links.push({
-                            label: action.payload.label,
-                            id: id || action.payload.id,
+                            label: action.payload.label, id: id || action.payload.id,
                         });
                     }
                     return node;
@@ -249,7 +228,7 @@ const elementsReducer = (state = initialState, action) => {
                 })
             }
             return {
-                edges: state.edges,
+                ...state,
                 nodes: [...state.nodes]
             };
         default:
