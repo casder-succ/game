@@ -46,7 +46,11 @@ export const parseElementContent = (oldId, content, node, x, y) => {
         };
 
 
-        actions.push(graphAddEdge(newEdge), addNode(nodeToAdd), addLink(oldId, label, id),);
+        actions.push(
+            graphAddEdge(newEdge),
+            addNode(nodeToAdd, newEdge),
+            addLink(oldId, label, id)
+        );
     })
 
     return actions;

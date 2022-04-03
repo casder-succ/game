@@ -12,7 +12,7 @@ import CustomTextNode from "../Node/CustomTextNode";
 
 const Graph = () => {
     const dispatch = useDispatch();
-    const elements = useSelector(state => ([...state.nodes.nodes, ...state.edges.edges]));
+    const elements = useSelector(state => ([...state.elements.nodes, ...state.elements.edges]));
     const currElem = useSelector(state => state.currElement.currElem);
     const nodeTypes = {
         textNode: CustomTextNode,

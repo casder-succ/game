@@ -143,8 +143,8 @@ export const addLink = (source, label, id) => ({
     type: NODES__ADD_LINK, payload: {source, label, id},
 })
 
-export const addNode = (node) => ({
-    type: NODES__ADD_NODE, payload: node,
+export const addNode = (node, edge) => ({
+    type: NODES__ADD_NODE, payload: {node, edge},
 })
 
 export const removeEdgeLink = (targetId, sourceId) => ({

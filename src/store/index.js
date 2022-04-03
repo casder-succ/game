@@ -1,13 +1,11 @@
 import {combineReducers, createStore} from "redux";
-import edgesReducer from "./edgesReducer";
 import currElemReducer from "./currElemReducer";
 import editorFieldsReducer from "./editorFieldsReducer";
-import nodesReducer from "./nodesReducer";
+import elementsReducer from "./elementsReducer";
 
 const rootReducer = combineReducers({
     currElement: currElemReducer,
-    edges: edgesReducer,
-    nodes: nodesReducer,
+    elements: elementsReducer,
     editorFields: editorFieldsReducer,
 })
 

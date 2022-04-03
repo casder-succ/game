@@ -10,34 +10,89 @@ import {
     NODES__CHANGE_LABEL,
     NODES__ON_CONNECT,
     NODES__REMOVE_NODE,
-    NODES__REMOVE_LINK_ON, NODES__REMOVE_PH_LINK_ON, NODES__ADD_LINK, NODES__ADD_NODE
+    NODES__REMOVE_LINK_ON,
+    NODES__REMOVE_PH_LINK_ON,
+    NODES__ADD_LINK,
+    NODES__ADD_NODE,
+    EDGES__ADD_EDGES,
+    EDGES__ADD_EDGE,
+    EDGES__REMOVE_EDGE, EDGES__REMOVE_EDGES, EDGES__REMOVE_FROM, EDGES__REMOVE_TO, EDGES__REMOVE_LINK
 } from "./types";
 
 const initialState = {
-    nodes: initialElements.nodes, // nodesNames: initialElements.nodes.map(node => node.data.label),
+    nodes: initialElements.nodes,
+    edges: initialElements.edges,
 };
 
-const nodesReducer = (state = initialState, action) => {
+const elementsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case NODES__ADD_NODES:
-            // state.nodesNames.push(action.payload.map(node => node.data.label));
+        case EDGES__ADD_EDGES:
             return {
-                nodes: [...state.nodes, ...action.payload,], // nodesNames: state.nodesNames
+                nodes: state.nodes,
+                edges: [
+                    ...state.edges,
+                    ...action.payload,
+                ],
+            };
+        case EDGES__ADD_EDGE:
+            return {
+                nodes: state.nodes,
+                edges: [
+                    ...state.edges,
+                    action.payload
+                ]
+            }
+        case EDGES__REMOVE_EDGE:
+            return {
+                nodes: state.nodes,
+                edges: [
+                    ...state.edges.filter(edge => edge.id !== action.payload.id),
+                ],
+            };
 
+        case EDGES__REMOVE_EDGES:
+            const idList1 = action.payload.map(el => el.id);
+            return {
+                nodes: state.nodes,
+                edges: [
+                    ...state.edges.filter(edge => !idList1.find(id => id === edge.id)),
+                ],
+            };
+        case EDGES__REMOVE_FROM:
+            return {
+                nodes: state.nodes,
+                edges: state.edges.filter(edge => !edge.id.startsWith(`e${action.payload.id}`)),
+            };
+        case EDGES__REMOVE_TO:
+            return {
+                nodes: state.nodes,
+                edges: state.edges.filter(edge => !edge.id.endsWith(`${action.payload.id}`)),
+            };
+
+        case EDGES__REMOVE_LINK:
+            return {
+                nodes: state.nodes,
+                edges: state.edges.filter(edge => !(edge.target === action.payload.targetId && edge.source === action.payload.sourceId))
+            };
+        case NODES__ADD_NODES:
+            return {
+                nodes: [...state.nodes, ...action.payload,],
+                edges: state.edges,
             };
         case NODES__REMOVE_NODES:
             const idList = action.payload.map(node => node.id);
-            // const namesList = action.payload.map(node => node.data.label);
             return {
-                nodes: state.nodes.filter(node => !idList.find(id => id === node.id)), // nodesNames: state.nodesNames.filter((nodeName) => !namesList.find(name => name === nodeName)),
+                edges: state.edges,
+                nodes: state.nodes.filter(node => !idList.find(id => id === node.id)),
             };
         case NODES__REMOVE_NODE:
-            // const [nodeName] = state.nodes.filter(node => node.id !== action.payload.id).map(node => node.data.label);
             return {
-                nodes: state.nodes.filter(node => node.id !== action.payload.id), // nodesNames: state.nodesNames.filter((name) => name !== nodeName),
+                edges: state.edges,
+                nodes: state.nodes.filter(node => node.id !== action.payload.id),
             };
         case NODES__SET_CURRENT:
             return {
+                edges: state.edges,
                 nodes: [...state.nodes.map(node => {
                     node.data.isActive = node.id === action.payload.id;
                     return node;
@@ -45,6 +100,7 @@ const nodesReducer = (state = initialState, action) => {
             };
         case NODES__UNSET_CURRENT:
             return {
+                edges: state.edges,
                 nodes: [...state.nodes.map(node => {
                     node.data.isActive = false;
 
@@ -53,6 +109,7 @@ const nodesReducer = (state = initialState, action) => {
             };
         case NODES__CHANGE_MEDIA:
             return {
+                edges: state.edges,
                 nodes: state.nodes.map((node) => {
                     if (node.id === action.payload.id) {
                         node.data.media.video = action.payload.video;
@@ -63,6 +120,7 @@ const nodesReducer = (state = initialState, action) => {
             };
         case NODES__CHANGE_CONTENT:
             return {
+                edges: state.edges,
                 nodes: state.nodes.map((node) => {
                     if (node.id === action.payload.id) {
                         node.data.content = action.payload.content;
@@ -72,6 +130,7 @@ const nodesReducer = (state = initialState, action) => {
             };
         case NODES__CHANGE_LABEL:
             return {
+                edges: state.edges,
                 nodes: state.nodes.map((node) => {
                     if (node.id === action.payload.id) {
                         node.data.label = action.payload.label;
@@ -92,6 +151,7 @@ const nodesReducer = (state = initialState, action) => {
                 index += 1;
             }
             return {
+                edges: state.edges,
                 nodes: [
                     ...state.nodes,
                     {
@@ -123,6 +183,7 @@ const nodesReducer = (state = initialState, action) => {
             };
         case NODES__REMOVE_LINK_ON:
             return {
+                edges: state.edges,
                 nodes: state.nodes.map(node => {
                     let indexOf = -1;
                     let name = '';
@@ -143,6 +204,7 @@ const nodesReducer = (state = initialState, action) => {
             };
         case NODES__REMOVE_PH_LINK_ON:
             return {
+                edges: state.edges,
                 nodes: state.nodes.map(node => {
                     if (node.id === action.payload.sourceId) {
                         let indexOf = -1;
@@ -158,6 +220,7 @@ const nodesReducer = (state = initialState, action) => {
             };
         case NODES__ADD_LINK:
             return {
+                edges: state.edges,
                 nodes: state.nodes.map(node => {
                     if (node.id === action.payload.source) {
                         node.data.links.push({
@@ -169,10 +232,20 @@ const nodesReducer = (state = initialState, action) => {
                 })
             };
         case NODES__ADD_NODE:
+            const nodeNames = state.nodes.map(node => node.data.label);
+            if (!nodeNames.includes(action.payload.node.data.label)) {
+                state.nodes.push(action.payload.node);
+                state.edges.push(action.payload.edge)
+            } else {
+                state.edges.push({
+                    ...action.payload.edge,
+                    id: state.nodes.filter(node => node.data.label === action.payload.node.label).map(node => node.data.label)[0]
+                })
+            }
             return {
+                edges: state.edges,
                 nodes: [
-                    ...state.nodes,
-                    action.payload
+                    ...state.nodes
                 ]
             };
         default:
@@ -180,4 +253,4 @@ const nodesReducer = (state = initialState, action) => {
     }
 }
 
-export default nodesReducer;
+export default elementsReducer; 

@@ -7,7 +7,7 @@ import {currSet, graphSetCurrent} from "../../store/actionCreators";
 
 const NodeList = () => {
     const dispatch = useDispatch();
-    const nodes = useSelector(state => state.nodes.nodes);
+    const nodes = useSelector(state => state.elements.nodes);
 
     const onElementClick = (id) => {
         const [params] = nodes.filter((element) => element.id === id);
