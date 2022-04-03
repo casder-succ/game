@@ -1,7 +1,6 @@
 import {NodeFlow} from "./nodes";
 import {
-    addLink, addNode, graphAddEdge, removeEdgeLink,
-    removeEdgesTo, removePhLink
+    addLink, addNode, removeEdgeLink, removePhLink
 } from "../store/actionCreators";
 
 const REG_FOR_NODES = /\[[[\sA-Za-z]+]]/gm;
@@ -18,7 +17,6 @@ export const parseElementContent = (oldId, content, node, x, y) => {
         match = REG_FOR_NODES.exec(content)
         if (!match) break;
         if (!firstMatch) firstMatch = match.index;
-        console.log(match)
         if (match[0] !== "[[]]") {
             matches.push(match[0].replace('[[', '').replace(']]', ''));
         }
@@ -33,7 +31,6 @@ export const parseElementContent = (oldId, content, node, x, y) => {
 
     const newLinks = matches.filter(match => !node.data.links.find(link => link.label === match));
     newLinks.forEach((link, i) => {
-        console.log(link)
         const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
         const label = link;
 
@@ -47,7 +44,6 @@ export const parseElementContent = (oldId, content, node, x, y) => {
 
 
         actions.push(
-            graphAddEdge(newEdge),
             addNode(nodeToAdd, newEdge),
             addLink(oldId, label, id)
         );
