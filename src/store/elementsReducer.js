@@ -34,8 +34,12 @@ const elementsReducer = (state = initialState, action) => {
                 ...state, edges: [...state.edges, ...action.payload,],
             };
         case EDGES__ADD_EDGE:
+            if (!state.edges.find(edge => edge.id === action.payload.id)) {
+                state.edges.push(action.payload);
+            }
             return {
-                ...state, edges: [...state.edges, action.payload]
+                ...state,
+                edges: state.edges
             }
         case EDGES__REMOVE_EDGE:
             return {
@@ -148,17 +152,18 @@ const elementsReducer = (state = initialState, action) => {
         case NODES__ON_CONNECT:
             return {
                 ...state, nodes: state.nodes.map((node) => {
-                    console.log(node)
-                    let content;
-                    state.nodes.forEach(el => {
-                        if (el.id === action.payload.target) {
-                            content = el.data.label || `id: ${el.id}`;
-                        }
-                    })
-
                     if (node.id === action.payload.source) {
-                        node.data.links.push({id: action.payload.target, label: content});
-                        node.data.content += `[[${content}]]`;
+                        let content;
+                        state.nodes.forEach(el => {
+                            if (el.id === action.payload.target) {
+                                content = el.data.label || `id: ${el.id}`;
+                            }
+                        })
+
+                        if (!node.data.links.find(link => link.label === content)) {
+                            node.data.links.push({id: action.payload.target, label: content});
+                            node.data.content += `[[${content}]]`;
+                        }
                     }
                     return node;
                 })
@@ -223,7 +228,7 @@ const elementsReducer = (state = initialState, action) => {
             } else {
                 state.edges.push({
                     ...action.payload.edge,
-                    id: action.payload.edge.id.replace(action.payload.node.id, state.nodes.filter(node => node.data.label === action.payload.node.label).map(node => node.data.label)[0]),
+                    id: action.payload.edge.id.replace(action.payload.node.id, state.nodes.filter(node => node.data.label === action.payload.node.data.label).map(node => node.id)[0]),
                     target: state.nodes.filter(node => node.data.label === action.payload.node.data.label).map(node => node.id)[0]
                 })
             }
