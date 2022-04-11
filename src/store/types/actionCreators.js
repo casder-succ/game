@@ -5,17 +5,10 @@ import {
     CHANGE_LABEL,
     CHANGE_PHOTO,
     CHANGE_CONTENT,
-    SET_CURR,
-    UNSET_CURR,
     NODES__CHANGE_MEDIA,
     NODES__ON_CONNECT,
-    ADD_ELEMENTS,
-    ADD_LINK,
-    REMOVE_LINK,
-    REMOVE_BY_ID,
     EDGES__ADD_EDGE,
     EDGES__REMOVE_EDGES,
-    NODES__SET_CURRENT,
     NODES__UNSET_CURRENT,
     NODES__CHANGE_LABEL,
     NODES__CHANGE_CONTENT,
@@ -55,15 +48,6 @@ export const fieldsUnset = () => ({
     type: UNSET,
 });
 
-export const currSet = (element) => ({
-    type: SET_CURR, payload: element
-
-});
-
-export const currUnset = () => ({
-    type: UNSET_CURR,
-});
-
 export const nodesMedia = (id, photo, video) => ({
     type: NODES__CHANGE_MEDIA, payload: {id, photo, video}
 });
@@ -80,36 +64,10 @@ export const nodesOnConnect = (source, target) => ({
     type: NODES__ON_CONNECT, payload: {source, target}
 });
 
-export const graphAddEls = (els) => ({
-    type: ADD_ELEMENTS, payload: els,
-});
-
-export const graphAddLink = (params) => ({
-    type: ADD_LINK, payload: params,
-});
-
-export const graphRemoveLink = (id) => ({
-    type: REMOVE_LINK, payload: {
-        id
-    }
-});
-
-export const graphSetCurrent = (id) => ({
-    type: NODES__SET_CURRENT, payload: {
-        id
-    }
-});
-
 export const graphUnsetCurrent = (id) => ({
     type: NODES__UNSET_CURRENT, payload: {
         id
     }
-});
-
-export const graphRemoveById = (id) => ({
-    type: REMOVE_BY_ID, payload: {
-        id
-    },
 });
 
 export const graphAddEdge = (edge) => ({
