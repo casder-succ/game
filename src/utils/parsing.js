@@ -1,7 +1,7 @@
 import {NodeFlow} from "./nodes";
 import {
     addLink, addNode, removeEdgeLink, removePhLink
-} from "../store/actionCreators";
+} from "../store/types/actionCreators";
 
 const REG_FOR_NODES = /\[\[[\sA-Za-z0-9]+]]/gm;
 

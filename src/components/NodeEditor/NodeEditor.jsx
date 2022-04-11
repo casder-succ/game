@@ -5,8 +5,8 @@ import {
     fieldsPhoto,
     fieldsVideo,
     fieldsContent,
-    fieldsUnset, currUnset, graphRemoveLink, removeNode, removeEdgesTo, removeEdgesFrom, removeLinkOn
-} from "../../store/actionCreators";
+    fieldsUnset, removeNode, removeEdgesTo, removeEdgesFrom, removeLinkOn, toggleCurrent
+} from "../../store/types/actionCreators";
 
 import './main.sass'
 import {useDispatch, useSelector} from "react-redux";
@@ -76,10 +76,9 @@ const NodeEditor = ({node, onSubmit}) => {
                         </button>
                         <button className="editor_button"
                             onClick={() => {
-                                dispatch(currUnset());
+                                dispatch(toggleCurrent());
                                 dispatch(removeLinkOn(node.id));
                                 dispatch(removeNode(node.id));
-                                dispatch(graphRemoveLink(node.id));
                                 dispatch(removeEdgesTo(node.id));
                                 dispatch(removeEdgesFrom(node.id));
                                 dispatch(fieldsUnset());
