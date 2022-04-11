@@ -20,11 +20,13 @@ import {
     EDGES__REMOVE_EDGES,
     EDGES__REMOVE_FROM,
     EDGES__REMOVE_TO,
-    EDGES__REMOVE_LINK
+    EDGES__REMOVE_LINK, SET_CURR, UNSET_CURR, NODES__TOGGLE_CURRENT
 } from "./types";
 
 const initialState = {
-    nodes: initialElements.nodes, edges: initialElements.edges,
+    nodes: initialElements.nodes,
+    edges: initialElements.edges,
+    currentElement: null,
 };
 
 const elementsReducer = (state = initialState, action) => {
@@ -77,21 +79,6 @@ const elementsReducer = (state = initialState, action) => {
         case NODES__REMOVE_NODE:
             return {
                 ...state, nodes: state.nodes.filter(node => node.id !== action.payload.id),
-            };
-        case NODES__SET_CURRENT:
-            return {
-                ...state, nodes: [...state.nodes.map(node => {
-                    node.data.isActive = node.id === action.payload.id;
-                    return node;
-                }),],
-            };
-        case NODES__UNSET_CURRENT:
-            return {
-                ...state, nodes: [...state.nodes.map(node => {
-                    node.data.isActive = false;
-
-                    return node
-                }),],
             };
         case NODES__CHANGE_MEDIA:
             return {
@@ -235,6 +222,32 @@ const elementsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 nodes: [...state.nodes]
+            };
+        case SET_CURR:
+            return {
+                ...state,
+                nodes: state.nodes.map(node => {
+                    node.data.isActive = node.id === action.payload.id && !node.data.isActive;
+                    return node;
+                }),
+                currentElement: action.payload
+            };
+        case NODES__TOGGLE_CURRENT:
+            return {
+                ...state, nodes: state.nodes.map(node => {
+                    node.data.isActive = node.id === action.payload.id && !node.data.isActive;
+                    return node;
+                }),
+                currentElement: state.currentElement && state.currentElement.id === action.payload.id ? null : action.payload,
+            };
+        case UNSET_CURR:
+            return {
+                ...state,
+                nodes: state.nodes.map(node => {
+                    node.data.isActive = false;
+                    return node;
+                }),
+                currentElement: null
             };
         default:
             return state;

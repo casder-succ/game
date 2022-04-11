@@ -1,10 +1,8 @@
 import {combineReducers, createStore} from "redux";
-import currElemReducer from "./currElemReducer";
-import editorFieldsReducer from "./editorFieldsReducer";
-import elementsReducer from "./elementsReducer";
+import editorFieldsReducer from "./fields/editorFieldsReducer";
+import elementsReducer from "./elements/elementsReducer";
 
 const rootReducer = combineReducers({
-    currElement: currElemReducer,
     elements: elementsReducer,
     editorFields: editorFieldsReducer,
 })

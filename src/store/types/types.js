@@ -22,6 +22,7 @@ export const NODES__REMOVE_LINK_ON = "REMOVE_LINK_ON";
 export const NODES__REMOVE_PH_LINK_ON = "REMOVE_PH_LINK_ON";
 export const NODES__ADD_LINK = "ADD_LINK_N";
 export const NODES__ADD_NODE = "ADD_NODE_N";
+export const NODES__TOGGLE_CURRENT = "TOGGLE_CURRENT";
 
 
 export const EDGES__ADD_EDGES = "ADD_EDGES";
