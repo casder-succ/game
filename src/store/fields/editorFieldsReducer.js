@@ -1,4 +1,4 @@
-import {INIT, CHANGE_CONTENT, CHANGE_LABEL, CHANGE_VIDEO, CHANGE_PHOTO, UNSET} from "./types";
+import {INIT, CHANGE_CONTENT, CHANGE_LABEL, CHANGE_VIDEO, CHANGE_PHOTO, UNSET} from "../types/types";
 
 const initialState = {
     fields: {
