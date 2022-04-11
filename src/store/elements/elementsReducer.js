@@ -1,10 +1,8 @@
-import initialElements from './graphElements';
+import initialElements from '../state/graphElements';
 import {
     NODES__REMOVE_NODES,
     NODES__ADD_NODES,
-    NODES__UNSET_CURRENT,
     NODES__CHANGE_MEDIA,
-    NODES__SET_CURRENT,
     NODES__NEW_NODE,
     NODES__CHANGE_CONTENT,
     NODES__CHANGE_LABEL,
@@ -20,8 +18,8 @@ import {
     EDGES__REMOVE_EDGES,
     EDGES__REMOVE_FROM,
     EDGES__REMOVE_TO,
-    EDGES__REMOVE_LINK, SET_CURR, UNSET_CURR, NODES__TOGGLE_CURRENT
-} from "./types";
+    EDGES__REMOVE_LINK, NODES__TOGGLE_CURRENT
+} from "../types/types";
 
 const initialState = {
     nodes: initialElements.nodes,
@@ -223,31 +221,13 @@ const elementsReducer = (state = initialState, action) => {
                 ...state,
                 nodes: [...state.nodes]
             };
-        case SET_CURR:
-            return {
-                ...state,
-                nodes: state.nodes.map(node => {
-                    node.data.isActive = node.id === action.payload.id && !node.data.isActive;
-                    return node;
-                }),
-                currentElement: action.payload
-            };
         case NODES__TOGGLE_CURRENT:
             return {
                 ...state, nodes: state.nodes.map(node => {
-                    node.data.isActive = node.id === action.payload.id && !node.data.isActive;
+                    node.data.isActive = action.payload && node.id === action.payload.id && !node.data.isActive;
                     return node;
                 }),
-                currentElement: state.currentElement && state.currentElement.id === action.payload.id ? null : action.payload,
-            };
-        case UNSET_CURR:
-            return {
-                ...state,
-                nodes: state.nodes.map(node => {
-                    node.data.isActive = false;
-                    return node;
-                }),
-                currentElement: null
+                currentElement: action.payload ? state.currentElement && state.currentElement.id === action.payload.id ? null : action.payload : null,
             };
         default:
             return state;
