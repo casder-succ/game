@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import "./main.sass";
 import NewNodeForm from "./NewNodeForm";
-import {currSet, graphSetCurrent} from "../../store/actionCreators";
+import {toggleCurrent} from "../../store/types/actionCreators";
 
 const NodeList = () => {
     const dispatch = useDispatch();
@@ -11,8 +11,7 @@ const NodeList = () => {
 
     const onElementClick = (id) => {
         const [params] = nodes.filter((element) => element.id === id);
-        dispatch(currSet(params));
-        dispatch(graphSetCurrent(params.id));
+        dispatch(toggleCurrent(params));
     }
 
     return (

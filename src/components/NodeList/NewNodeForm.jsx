@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {NodeFlow} from '../../utils/nodes';
 
 import './main.sass';
-import {newNode} from "../../store/actionCreators";
+import {newNode} from "../../store/types/actionCreators";
 
 const NewNodeForm = ({els}) => {
     const dispatch = useDispatch();
