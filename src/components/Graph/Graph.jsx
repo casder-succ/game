@@ -13,7 +13,7 @@ import CustomTextNode from "../Node/CustomTextNode";
 const Graph = () => {
     const dispatch = useDispatch();
     const elements = useSelector(state => ([...state.elements.nodes, ...state.elements.edges]));
-    const currElem = useSelector(state => state.currElement.currElem);
+    const currentElement = useSelector(state => state.elements.currentElement);
     const nodeTypes = {
         textNode: CustomTextNode,
     }
@@ -30,9 +30,9 @@ const Graph = () => {
                 onPaneClick={() => onPaneClick(dispatch)}
             >
 
-                {currElem && <NodeEditor
-                    node={currElem}
-                    onSubmit={(params, node) => onElementEdit(params, node, currElem, dispatch)}
+                {currentElement && <NodeEditor
+                    node={currentElement}
+                    onSubmit={(params, node) => onElementEdit(params, node, currentElement, dispatch)}
                 />}
             </ReactFlow>
         </div>
