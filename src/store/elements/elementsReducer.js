@@ -67,7 +67,8 @@ const elementsReducer = (state = initialState, action) => {
             };
         case NODES__ADD_NODES:
             return {
-                nodes: [...state.nodes, ...action.payload,], ...state,
+                ...state,
+                nodes: [...state.nodes, ...action.payload,],
             };
         case NODES__REMOVE_NODES:
             const idList = action.payload.map(node => node.id);
