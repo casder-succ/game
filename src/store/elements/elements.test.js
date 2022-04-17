@@ -25,7 +25,7 @@ describe("elements reducer", function () {
         const edge = {id: "ef1-f3", source: 'f1', target: 'f3'}
         const newState = elementsReducer(state, {type: EDGES__ADD_EDGE, payload: edge})
 
-        expect(newState).toEqual({...state, edges: [...state.edges, edge]})
+        expect(newState).toEqual({...state, edges: [...state.edges]})
     });
 
 });
