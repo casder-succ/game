@@ -1,5 +1,5 @@
-import { shallow, render, mount } from 'enzyme';
-import React, {useEffect} from 'react';
+import { render } from 'enzyme';
+import React from 'react';
 import Graph from "./Graph";
 import {Provider} from "react-redux";
 import store from "../../store";
@@ -29,16 +29,4 @@ describe("Graph component", function () {
         expect(wrapper.length).toBe(1);
     });
 
-    it('should render initial elements', function () {
-        useEffect = jest.spyOn(React, "useEffect").mockImplementation(f => f());
-
-        const component = shallow(
-            <Provider store={store}>
-                <Graph />
-            </Provider>
-        );
-
-        const nodes = component.find('.react-flow__node');
-        expect(nodes.length).toBe(3);
-    });
 });
