@@ -39,7 +39,7 @@ const elementsReducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                edges: state.edges
+                edges: [...state.edges, action.payload]
             }
         case EDGES__REMOVE_EDGE:
             return {
