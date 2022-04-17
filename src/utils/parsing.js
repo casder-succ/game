@@ -5,7 +5,7 @@ import {
 
 const REG_FOR_NODES = /\[\[[\sA-Za-z0-9]+]]/gm;
 
-export const parseElementContent = (oldId, content, node, x, y) => {
+export const parseElementContent = (content, node, x, y) => {
     const x_y = [{x: 180, y: 160}, {x: 250, y: 90}, {x: 240, y: -90}, {x: 150, y: -180}]
 
     const actions = [];
@@ -39,13 +39,13 @@ export const parseElementContent = (oldId, content, node, x, y) => {
 
         const nodeToAdd = new NodeFlow(x_r, y_r, label, id);
         const newEdge = {
-            id: `e${oldId}-${id}`, source: `${oldId}`, target: `${id}`
+            id: `e${node.id}-${id}`, source: `${node.id}`, target: `${id}`
         };
 
 
         actions.push(
             addNode(nodeToAdd, newEdge),
-            addLink(oldId, label, id)
+            addLink(node.id, label, id)
         );
     })
 
