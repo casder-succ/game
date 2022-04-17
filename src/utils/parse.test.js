@@ -6,13 +6,14 @@ const state = {
     nodes: [...elements.nodes],
     edges: [...elements.edges],
 };
+const element = state.nodes[0];
+let newState = {...state};
+let newNode;
+let newEdge;
+let actions;
 
 describe("parsing content with one new node", function () {
-    const element = state.nodes[0];
-    let actions;
-    let newState = {...state};
-    let newNode;
-    let newEdge;
+
     beforeEach(() => {
         actions = parseElementContent(element.data.content + "[[anna]]", element, element.position.x, element.position.y);
         for (const action of actions) {
@@ -20,7 +21,7 @@ describe("parsing content with one new node", function () {
         }
         newNode = newState.nodes.find(node => !elements.nodes.find(n => n.id === node.id));
         newEdge = newState.edges.find((edge => !elements.edges.find((e => e.id === edge.id))))
-    })
+    });
 
     it('should create new element', function () {
         expect(newState.nodes.length).toBe(4);
@@ -45,5 +46,26 @@ describe("parsing content with one new node", function () {
     it('should create edge to new node', function () {
         expect(newEdge.target).toBe(newNode.id);
     });
+
+});
+
+describe("parsing content after deleting [[]]", function () {
+    let elAfter;
+    beforeEach(() => {
+        actions = parseElementContent(element.data.content.replace("[[", ""), element, element.position.x, element.position.y);
+        for (const action of actions) {
+            newState = elementsReducer(newState, action);
+        }
+        elAfter = newState.nodes.find(node => node.id === element.id);
+    })
+
+    it('should delete edge', function () {
+        expect(newState.edges.length).toEqual(elements.edges.length - 1);
+    });
+
+    it('should delete link', function () {
+        expect(elAfter.data.links.length).toBe(0);
+    });
+
 });
 
