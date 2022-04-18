@@ -165,9 +165,31 @@ describe("parsing after adding few [[]](new)", function () {
 
 });
 
-describe("parsing after adding few [[]](existed)", function () {
-    it('should create few node', function () {
+describe("parsing after adding [[]](existed)", function () {
+    let node;
+    beforeEach(() => {
+        node = JSON.parse(JSON.stringify(elements.nodes[0]))
+        newState = JSON.parse(JSON.stringify(elements));
+        const actions = parseElementContent(node.data.content + "[[Emma eats]]", node, node.position.x, node.position.y);
+        for (const action of actions) {
+            newState = elementsReducer(newState, action);
+        }
+    });
 
+    it('should not create new node', function () {
+        expect(newState.nodes.length).toEqual(elements.nodes.length);
+    });
+
+    it('should create new edge', function () {
+        expect(newState.edges.length).toEqual(elements.edges.length + 1)
+    });
+
+    it('should create link', function () {
+        expect(newState.nodes[0].data.links.find(link => link.label === 'Emma eats')).not.toBe(undefined);
+    });
+
+    it('should create edge with correct target and source', function () {
+        expect(newState.edges.find(edge => edge.id === `ef1-f3`)).not.toBe(undefined);
     });
 
 });
