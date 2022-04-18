@@ -78,13 +78,12 @@ describe("parsing after deleting node", function () {
     const node = state.nodes[1];
     beforeEach(() => {
         const actions = [removeLinkOn(node.id), removeNode(node.id), removeEdgesTo(node.id), removeEdgesFrom(node.id)];
-        newState = {...state};
+        newState = {nodes: [...elements.nodes], edges: [...elements.edges]};
         for (const action of actions) {
             newState = elementsReducer(newState, action);
         }
     });
 
-    //doesnt work
     it('should delete node', function () {
         expect(newState.nodes.length).toBe(elements.nodes.length - 1);
     });
@@ -97,15 +96,19 @@ describe("parsing after deleting node", function () {
         expect(count).toBe(0);
     });
 
-    //empty
     it('should delete edges', function () {
+        let count = 0;
+        for (const edge of newState.edges) {
+            if (edge.id.includes(node.id)) count++;
+        }
 
+        expect(count).toBe(0);
     });
 
 });
 
 describe("parsing after editing [[]]", function () {
-    
+
 
 });
 
