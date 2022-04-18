@@ -10,7 +10,7 @@ const state = {
     edges: [...elements.edges],
 };
 const element = state.nodes[0];
-let newState = {...state};
+let newState;
 let newNode;
 let newEdge;
 let actions;
@@ -18,6 +18,7 @@ let actions;
 describe("parsing content with one new node", function () {
 
     beforeEach(() => {
+        newState = JSON.parse(JSON.stringify(elements));
         actions = parseElementContent(element.data.content + "[[anna]]", element, element.position.x, element.position.y);
         for (const action of actions) {
             newState = elementsReducer(newState, action);
@@ -57,6 +58,7 @@ describe("parsing content with one new node", function () {
 describe("parsing content after deleting [[]]", function () {
     let elAfter;
     beforeEach(() => {
+        newState = JSON.parse(JSON.stringify(elements));
         actions = parseElementContent(element.data.content.replace("[[", ""), element, element.position.x, element.position.y);
         for (const action of actions) {
             newState = elementsReducer(newState, action);
@@ -78,7 +80,7 @@ describe("parsing after deleting node", function () {
     const node = state.nodes[1];
     beforeEach(() => {
         const actions = [removeLinkOn(node.id), removeNode(node.id), removeEdgesTo(node.id), removeEdgesFrom(node.id)];
-        newState = {nodes: [...elements.nodes], edges: [...elements.edges]};
+        newState = JSON.parse(JSON.stringify(elements));
         for (const action of actions) {
             newState = elementsReducer(newState, action);
         }
@@ -122,7 +124,51 @@ describe("parsing after editing label", function () {
 
 });
 
-describe("parsing after deleting few [[]]", function () {
+describe("parsing after deleting few nodes", function () {
+    const node1 = state.nodes[1];
+    const node2 = state.nodes[2];
 
+    beforeEach(() => {
+        const actions = [
+            removeLinkOn(node1.id), removeNode(node1.id), removeEdgesTo(node1.id), removeEdgesFrom(node1.id),
+            removeLinkOn(node2.id), removeNode(node2.id), removeEdgesTo(node2.id), removeEdgesFrom(node2.id)
+        ];
+        newState = JSON.parse(JSON.stringify(elements));
+
+        for (const action of actions) {
+            newState = elementsReducer(newState, action);
+        }
+    });
+
+    it('should delete nodes', function () {
+        expect(newState.nodes.length).toBe(elements.nodes.length - 2);
+    });
+
+    it('should delete edges', function () {
+        let count = 0;
+        for (const edge of newState.edges) {
+            if (edge.id.includes(node1.id) || edge.id.includes(node2.id)) count++;
+        }
+
+        expect(count).toBe(0);
+    });
+
+    it('should delete links', function () {
+        let count = 0;
+        for (const node of newState.nodes) {
+            if (node.data.links.find(link => link.label === node1.data.label || link.label === node2.data.label)) count++;
+        }
+
+        expect(count).toBe(0);
+    });
+
+    it('should delete physical links', function () {
+        let count = 0;
+        for (const node of newState.nodes) {
+            if (node.data.content.includes(node1.data.label) || node.data.content.includes(node2.data.label)) count++;
+        }
+
+        expect(count).toBe(0);
+    });
 
 });
