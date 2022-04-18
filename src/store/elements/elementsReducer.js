@@ -223,7 +223,7 @@ const elementsReducer = (state = initialState, action) => {
                 }),
                 currentElement: action.payload ? state.currentElement && state.currentElement.id === action.payload.id ? null : action.payload : null,
             };
-            
+
         default:
             return state;
     }
