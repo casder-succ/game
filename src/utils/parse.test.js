@@ -152,28 +152,49 @@ describe("parsing after editing [[]]", function () {
 
 });
 
-describe("parsing after adding few [[]]", function () {
+describe("parsing after adding few [[]](new)", function () {
+    it('should create few node', function () {
 
+    });
+
+});
+
+describe("parsing after adding few [[]](existed)", function () {
+    it('should create few node', function () {
+
+    });
 
 });
 
 describe("parsing after editing label", function () {
+    it('should edit all of links', function () {
 
+    });
+
+    it('should edit all of physical links', function () {
+
+    });
 
 });
 
 describe("parsing after deleting few [[]]", function () {
+    it('should delete few edges', function () {
 
+    });
+
+    it('should delete few links', function () {
+
+    });
 
 });
 
 describe("parsing after adding the same [[]]", function () {
-
+    //while idk but mb it should not create new edge/push new link/create new node
 
 });
 
 describe("parsing after adding the same and new [[]]", function () {
-
+    //should create new edge(1) and not create second, create new node if necessary
 
 });
 
