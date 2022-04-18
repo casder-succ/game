@@ -143,11 +143,17 @@ describe("parsing after editing [[]]", function () {
     });
 
     it('should create new link', function () {
-
+        const newLink = newState.nodes[0].data.links.find(link => {
+            return link.label === newLabel
+        });
+        expect(newLink.label).toEqual(newLabel);
     });
 
     it('should add new edge', function () {
+        const newId = newState.nodes.find(node => node.data.label === newLabel).id;
+        const newEdge = newState.edges.find(edge => edge.id === `e${node.id}-${newId}`);
 
+        expect(newEdge).not.toBe(undefined);
     });
 
 });
@@ -189,6 +195,7 @@ describe("parsing after deleting few [[]]", function () {
 });
 
 describe("parsing after adding the same [[]]", function () {
+
     //while idk but mb it should not create new edge/push new link/create new node
 
 });
