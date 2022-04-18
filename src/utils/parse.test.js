@@ -16,7 +16,6 @@ let newEdge;
 let actions;
 
 describe("parsing content with one new node", function () {
-
     beforeEach(() => {
         newState = JSON.parse(JSON.stringify(elements));
         actions = parseElementContent(element.data.content + "[[anna]]", element, element.position.x, element.position.y);
@@ -110,7 +109,46 @@ describe("parsing after deleting node", function () {
 });
 
 describe("parsing after editing [[]]", function () {
+    let node;
+    let oldLabel;
+    let id;
+    const newLabel = 'tomara loves'
+    beforeEach(() => {
+        node = JSON.parse(JSON.stringify(elements.nodes[0]))
+        oldLabel = /\[\[[\sA-Za-z0-9]+]]/gm.exec(node.data.content)[0].replace(/(\[\[|]])/gm, '');
+        newState = JSON.parse(JSON.stringify(elements));
+        id = newState.nodes.find(node => node.data.label === oldLabel).id;
+        const actions = parseElementContent(node.data.content.replace(/\[\[[\sA-Za-z0-9]+]]/gm, `[[${newLabel}]]`), node, node.position.x, node.position.y);
+        for (const action of actions) {
+            newState = elementsReducer(newState, action);
+        }
+    });
 
+    it('should delete link', function () {
+        let count = 0;
+        for (const node of newState.nodes) {
+            if (node.data.links.find(link => link.label === oldLabel)) count++;
+        }
+
+        expect(count).toBe(0);
+    });
+
+    it('should delete edge', function () {
+        let count = 0;
+        for (const edge of newState.edges) {
+            if (edge.id === `e${node.id}-${id}`) count++;
+        }
+
+        expect(count).toBe(0);
+    });
+
+    it('should create new link', function () {
+
+    });
+
+    it('should add new edge', function () {
+
+    });
 
 });
 
