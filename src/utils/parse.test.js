@@ -124,6 +124,21 @@ describe("parsing after editing label", function () {
 
 });
 
+describe("parsing after deleting few [[]]", function () {
+
+
+});
+
+describe("parsing after adding the same [[]]", function () {
+
+
+});
+
+describe("parsing after adding the same and new [[]]", function () {
+
+
+});
+
 describe("parsing after deleting few nodes", function () {
     const node1 = state.nodes[1];
     const node2 = state.nodes[2];
