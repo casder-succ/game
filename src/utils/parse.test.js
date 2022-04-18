@@ -2,6 +2,7 @@ import elements from "../store/state/graphElements";
 import {parseElementContent} from "./parsing";
 import elementsReducer from "../store/elements/elementsReducer";
 import {
+    nodesLabel,
     removeEdgesFrom, removeEdgesTo, removeLinkOn, removeNode
 } from "../store/types/actionCreators";
 
@@ -195,12 +196,36 @@ describe("parsing after adding [[]](existed)", function () {
 });
 
 describe("parsing after editing label", function () {
-    it('should edit all of links', function () {
+    let node;
+    let oldLabel;
+    const newLabel = 'alalal'
+    beforeEach(() => {
+        node = JSON.parse(JSON.stringify(elements.nodes[0]));
+        oldLabel = node.data.label;
+        newState = JSON.parse(JSON.stringify(elements));
+        newState = elementsReducer(newState, nodesLabel(node.id, newLabel));
+    });
 
+    it('should change label', function () {
+        expect(newState.nodes[0].data.label).toBe(newLabel);
+    });
+
+    it('should not more exist links on old label', function () {
+        let count = 0;
+        for (const node of newState.nodes) {
+            if (node.data.links.find(link => link.label === oldLabel)) count++;
+        }
+
+        expect(count).toBe(0);
     });
 
     it('should edit all of physical links', function () {
+        let count = 0;
+        for (const node of newState.nodes) {
+            if (node.data.content.includes(oldLabel)) count++;
+        }
 
+        expect(count).toBe(0);
     });
 
 });
@@ -217,8 +242,27 @@ describe("parsing after deleting few [[]]", function () {
 });
 
 describe("parsing after adding the same [[]]", function () {
+    let node;
+    beforeEach(() => {
+        node = JSON.parse(JSON.stringify(elements.nodes[0]));
+        newState = JSON.parse(JSON.stringify(elements));
+        actions = parseElementContent(element.data.content + '[[Emma sends letter]]', node, node.position.x, node.position.y);
+        for (const action of actions) {
+            newState = elementsReducer(newState, action);
+        }
+    });
 
-    //while idk but mb it should not create new edge/push new link/create new node
+    it('should not create new node', function () {
+        expect(newState.nodes.length).toBe(elements.nodes.length);
+    });
+
+    it('should not create new edge', function () {
+        expect(newState.edges.length).toBe(elements.edges.length);
+    });
+
+    it('should not create new link', function () {
+        expect(newState.nodes[0].data.links.length).toBe(node.data.links.length);
+    });
 
 });
 
